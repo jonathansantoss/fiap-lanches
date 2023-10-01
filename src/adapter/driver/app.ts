@@ -1,5 +1,5 @@
 import express from "express";
-import './config/data-source';
+import '../driven/infra/config/data-source';
 
 const app = express();
 

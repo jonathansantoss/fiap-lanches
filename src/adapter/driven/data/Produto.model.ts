@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 import { v4 as UuidV4 } from "uuid";
 
 @Entity("produto")
-class Produto {
+class Produto implements IProduto {
   @PrimaryGeneratedColumn()
   id: string;
 
