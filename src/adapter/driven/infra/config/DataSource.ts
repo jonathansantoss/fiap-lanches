@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
-import { logger } from './winston-log';
-import { Produto } from "../../data/produto.model";
+import { logger } from './WinstonLog';
+import { Produto } from "../../data/Produto.model";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
