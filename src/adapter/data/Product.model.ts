@@ -1,12 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from "typeorm";
+import { Entity, PrimaryColumn, Column, ManyToMany } from "typeorm";
 import { v4 as UuidV4 } from "uuid";
 import { Order } from "./Order.model";
-import { IProduct } from '../../core/domain/entities/IProduct.entity';
+import { IProduct } from "../../core/domain/entities/IProduct.entity";
 
 @Entity("product")
 class Product implements IProduct {
-  
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn({
+    name: "id",
+    type: "uuid",
+  })
   id: string;
 
   @Column({
