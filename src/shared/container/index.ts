@@ -1,8 +1,8 @@
 import { container } from "tsyringe";
-import { IProdutoRepository } from "../../core/applications/ports/IProduto.repository";
-import { ProdutoRepository } from "../../adapter/driven/infra/repositories/produto.repository";
+import { IProductRepository } from "../../core/applications/ports/IProduct.repository";
+import { ProductRepository } from "../../adapter/driven/infra/repositories/Product.repository";
 
-container.registerSingleton<IProdutoRepository>(
+container.registerSingleton<IProductRepository>(
   "ProdutoRepository",
-  ProdutoRepository
+  ProductRepository
 );
