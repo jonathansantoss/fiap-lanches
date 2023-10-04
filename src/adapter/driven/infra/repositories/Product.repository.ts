@@ -9,8 +9,15 @@ class ProductRepository implements IProductRepository {
     AppDataSource.getRepository(Product);
 
   async save(product: IProduct): Promise<string> {
+    try {
       await this.repository.save(product)
       return product.id
+    } catch (error) {
+      const message = "Error on saving product in database"
+      console.error(`${message}: ${error.message}`)
+      throw new Error(message)
+    }
+
   }
 }
 

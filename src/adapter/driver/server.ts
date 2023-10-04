@@ -1,14 +1,12 @@
-import { ProductService } from "../../core/applications/services/Product.service";
-import { ProductRepository } from "../driven/infra/repositories/Product.repository";
-import { ProductController } from "./Product.controller";
+import ProductController from "./Product.controller";
+import bodyParser from 'body-parser';
 import { app } from "./app";
+
 const port = process.env.PORT || 3000;
 
-const productRepository = new ProductRepository();
-const productService = new ProductService(productRepository);
-const productController = new ProductController(productService);
+app.use(bodyParser.json());
 
-app.post('/product', productController.saveProduct.bind(productController));
+app.use('/api', ProductController);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
