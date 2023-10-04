@@ -1,4 +1,5 @@
 import { EOrderStatus } from "../enums/EOrderStatus";
+import { IClient } from "./IClient.entity";
 import { IProduct } from "./IProduct.entity";
 
 interface IOrder {
@@ -8,7 +9,7 @@ interface IOrder {
   startedAt: Date;
   deliveredAt: Date;
   status: EOrderStatus;
-  //client: Client;
+  client: IClient;
 }
 
 export { IOrder };

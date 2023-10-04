@@ -1,8 +1,22 @@
 import { container } from "tsyringe";
 import { IProductRepository } from "../../core/applications/ports/IProduct.repository";
 import { ProductRepository } from "../../adapter/driven/infra/repositories/Product.repository";
+import { ClientRepository } from "../../adapter/driven/infra/repositories/Client.repository";
+import { IClientRepository } from "../../core/applications/ports/IClient.repository";
+import { OrderRepository } from "../../adapter/driven/infra/repositories/Order.repository";
+import { IOrderRepository } from "../../core/applications/ports/IOrder.repository";
 
 container.registerSingleton<IProductRepository>(
-  "ProdutoRepository",
+  "ProductRepository",
   ProductRepository
+);
+
+container.registerSingleton<IOrderRepository>(
+  "OrderRepository",
+  OrderRepository
+);
+
+container.registerSingleton<IClientRepository>(
+  "ClientRepository",
+  ClientRepository
 );
