@@ -1,5 +1,6 @@
 import { IClient } from "../../core/domain/entities/IClient.entity";
 import { IOrder } from "../../core/domain/entities/IOrder.entity";
+import { v4 as UuidV4 } from "uuid";
 import { Entity, PrimaryColumn, Column, OneToMany } from "typeorm";
 import { Order } from "./Order.model";
 
@@ -31,6 +32,12 @@ class Client implements IClient {
   email?: string;
   @OneToMany(() => Order, (order) => order.client)
   orders: IOrder[];
+
+  constructor() {
+    if (!this.id) {
+      this.id = UuidV4();
+    }
+  }
 }
 
 export { Client };
