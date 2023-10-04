@@ -14,6 +14,7 @@ router.post(
         check('name').notEmpty().withMessage('Product name is not valid'),
         check('value').notEmpty().isNumeric().withMessage('Product value is not valid'),
         check('amount').notEmpty().isNumeric().withMessage('Product amount is not valid'),
+        check('category').notEmpty().withMessage('Product category is not valid'),
     ],
     (req: Request, res: Response) => {
         try {
