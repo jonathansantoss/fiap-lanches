@@ -1,8 +1,16 @@
-import { Entity, PrimaryColumn, Column, ManyToMany, JoinTable } from "typeorm";
+import {
+  Entity,
+  PrimaryColumn,
+  Column,
+  ManyToMany,
+  JoinTable,
+  ManyToOne,
+} from "typeorm";
 import { Product } from "./Product.model";
 import { v4 as UuidV4 } from "uuid";
 import { IOrder } from "../../core/domain/entities/IOrder.entity";
 import { EOrderStatus } from "../../core/domain/enums/EOrderStatus";
+import { Client } from "./Client.model";
 
 @Entity("order")
 class Order implements IOrder {
@@ -27,6 +35,9 @@ class Order implements IOrder {
   @ManyToMany(() => Product, (product) => product.orders)
   @JoinTable()
   products: Product[];
+
+  @ManyToOne(() => Client, (client) => client.orders)
+  client: Client;
 
   @Column({
     name: "started_at",
