@@ -8,8 +8,9 @@ class ProductRepository implements IProductRepository {
   private repository: Repository<Product> =
     AppDataSource.getRepository(Product);
 
-  save(produto: IProduct): void {
-    throw new Error("Method not implemented.");
+  async save(product: IProduct): Promise<string> {
+      await this.repository.save(product)
+      return product.id
   }
 }
 
