@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { container } from "tsyringe";
+import { container } from "../../../../shared/container";
 import { CreateClientUseCase } from "../../../../core/applications/usecases/client/CreateClientUseCase";
 
 class CreateClientController {

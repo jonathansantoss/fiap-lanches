@@ -20,3 +20,5 @@ container.registerSingleton<IClientRepository>(
   "ClientRepository",
   ClientRepository
 );
+
+export { container };

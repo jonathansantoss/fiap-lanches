@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { container } from "tsyringe";
+import { container } from "../../../../shared/container";
 import { CreateOrderUseCase } from "../../../../core/applications/usecases/order/CreateOrderUseCase";
 
 class CreateOrderController {

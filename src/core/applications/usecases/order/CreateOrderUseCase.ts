@@ -1,12 +1,16 @@
-import { OrderRepository } from "../../../../adapter/driven/infra/repositories/Order.repository";
+import { injectable, inject } from "tsyringe";
 import { IOrder } from "../../../domain/entities/IOrder.entity";
 import { ICreateOrderUseCase } from "../../ports/in/order/ICreateOrderUseCase";
+import { IOrderRepository } from "../../ports/out/order/IOrder.repository";
 
+@injectable()
 class CreateOrderUseCase implements ICreateOrderUseCase {
-  constructor(private repository: OrderRepository) {}
+  constructor(
+    @inject("OrderRepository") private orderRepository: IOrderRepository
+  ) {}
 
   execute(order: IOrder): void {
-    this.repository.save(order);
+    this.orderRepository.save(order);
   }
 }
 
