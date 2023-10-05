@@ -1,4 +1,4 @@
-import { IProductRepository } from "../../../../core/applications/ports/IProduct.repository";
+import { IProductRepository } from "../../../../core/applications/ports/out/product/IProduct.repository";
 import { IProduct } from "../../../../core/domain/entities/IProduct.entity";
 import { Repository } from "typeorm";
 import { AppDataSource } from "../config/DataSource";

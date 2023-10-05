@@ -10,7 +10,7 @@ class Client implements IClient {
     name: "id",
     type: "uuid",
   })
-  id: string;
+  id?: string;
   @Column({
     name: "cpf",
     type: "varchar",

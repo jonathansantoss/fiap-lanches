@@ -1,7 +1,7 @@
 import { IOrder } from "./IOrder.entity";
 
 interface IClient {
-  id: string;
+  id?: string;
   cpf?: string;
   name?: string;
   email?: string;

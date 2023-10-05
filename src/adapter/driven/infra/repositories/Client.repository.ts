@@ -1,4 +1,4 @@
-import { IClientRepository } from "../../../../core/applications/ports/IClient.repository";
+import { IClientRepository } from "../../../../core/applications/ports/out/client/IClient.repository";
 import { IClient } from "../../../../core/domain/entities/IClient.entity";
 import { Client } from "../../../data/Client.model";
 import { AppDataSource } from "../config/DataSource";

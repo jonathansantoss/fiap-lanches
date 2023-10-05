@@ -2,7 +2,7 @@ import { EProductCategory } from "../enums/EProductCategory";
 import { IOrder } from "./IOrder.entity";
 
 interface IProduct {
-  id: string;
+  id?: string;
   name: string;
   value: number;
   amount: number;

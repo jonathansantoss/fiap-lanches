@@ -1,4 +1,4 @@
-import { IProduct } from "../../domain/entities/IProduct.entity";
+import { IProduct } from "../../../../domain/entities/IProduct.entity";
 
 interface IProductRepository {
   save(produto: IProduct): Promise<string>;

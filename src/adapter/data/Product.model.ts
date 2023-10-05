@@ -10,7 +10,7 @@ class Product implements IProduct {
     name: "id",
     type: "uuid",
   })
-  id: string;
+  id?: string;
 
   @Column({
     name: "name",
@@ -38,7 +38,8 @@ class Product implements IProduct {
 
   @Column({
     name: "product_category",
-    type: "string",
+    type: "enum",
+    enum: EProductCategory,
     nullable: false,
   })
   category: EProductCategory;
