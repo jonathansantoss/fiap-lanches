@@ -2,6 +2,7 @@ import { Entity, PrimaryColumn, Column, ManyToMany } from "typeorm";
 import { v4 as UuidV4 } from "uuid";
 import { Order } from "./Order.model";
 import { IProduct } from "../../core/domain/entities/IProduct.entity";
+import { EProductCategory } from "../../core/domain/enums/EProductCategory";
 
 @Entity("product")
 class Product implements IProduct {
@@ -34,6 +35,13 @@ class Product implements IProduct {
 
   @ManyToMany(() => Order, (order) => order.products)
   orders: Order[];
+
+  @Column({
+    name: "product_category",
+    type: "string",
+    nullable: false,
+  })
+  category: EProductCategory;
 
   constructor() {
     if (!this.id) {

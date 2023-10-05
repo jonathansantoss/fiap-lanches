@@ -4,7 +4,7 @@ import { v4 as UuidV4 } from "uuid";
 import { Entity, PrimaryColumn, Column, OneToMany } from "typeorm";
 import { Order } from "./Order.model";
 
-@Entity("Client")
+@Entity("client")
 class Client implements IClient {
   @PrimaryColumn({
     name: "id",
