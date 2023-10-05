@@ -3,7 +3,7 @@ import { IClient } from "./IClient.entity";
 import { IProduct } from "./IProduct.entity";
 
 interface IOrder {
-  id: string;
+  id?: string;
   value: number;
   products: IProduct[];
   startedAt: Date;

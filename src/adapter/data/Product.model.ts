@@ -10,7 +10,7 @@ class Product implements IProduct {
     name: "id",
     type: "uuid",
   })
-  id: string;
+  id?: string;
 
   @Column({
     name: "name",
