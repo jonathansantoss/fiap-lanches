@@ -1,5 +1,5 @@
 import { IProduct } from "../../domain/entities/IProduct.entity";
-import { IProductRepository } from "../ports/IProduct.repository";
+import { IProductRepository } from "../ports/out/product/IProduct.repository";
 
 const uuid = require('uuid');
 

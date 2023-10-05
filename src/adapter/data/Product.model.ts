@@ -38,7 +38,8 @@ class Product implements IProduct {
 
   @Column({
     name: "product_category",
-    type: "string",
+    type: "enum",
+    enum: EProductCategory,
     nullable: false,
   })
   category: EProductCategory;
