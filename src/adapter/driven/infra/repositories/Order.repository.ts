@@ -1,4 +1,4 @@
-import { IOrderRepository } from "../../../../core/applications/ports/IOrder.repository";
+import { IOrderRepository } from "../../../../core/applications/ports/out/order/IOrder.repository";
 import { IOrder } from "../../../../core/domain/entities/IOrder.entity";
 import { Repository } from "typeorm";
 import { AppDataSource } from "../config/DataSource";
