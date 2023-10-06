@@ -8,7 +8,8 @@ class ClientRepository implements IClientRepository {
   private repository: Repository<Client> = AppDataSource.getRepository(Client);
 
   save(Client: IClient): void {
-    throw new Error("Method not implemented.");
+    const clientCreated = this.repository.create(Client);
+    this.repository.save(clientCreated);
   }
 }
 

@@ -4,6 +4,6 @@ import { CreateClientController } from "../../controllers/client/CreateClient.co
 const clientRouter = Router();
 const createClientController = new CreateClientController();
 
-clientRouter.get("/", createClientController.handler);
+clientRouter.post("/", createClientController.handler);
 
 export { clientRouter };
