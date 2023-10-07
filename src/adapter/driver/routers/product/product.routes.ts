@@ -1,10 +1,15 @@
 import { Router } from "express";
 import { CreateProductController } from "../../controllers/product/CreateProduct.controller";
-import { CreateProductUseCase } from "../../../../core/applications/usecases/product/CreateProductUseCase";
+import { validate } from "../../midleware/validator/validate";
+import { productSchema } from "../../schemas/ProductSchema";
 
 const productRouter = Router();
 const createProductController = new CreateProductController();
 
-productRouter.post("/", createProductController.handler);
+productRouter.post(
+  "/",
+  validate(productSchema),
+  createProductController.handler
+);
 
 export { productRouter };
