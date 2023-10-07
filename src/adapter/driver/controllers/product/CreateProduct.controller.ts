@@ -9,10 +9,10 @@ class CreateProductController {
       container.resolve<ICreateProductUseCase>(CreateProductUseCase);
 
     createProductUseCase.execute(request.body).then(resp => {
-      response.status(200).send(resp)
+      response.status(200).send({"productId": resp})
     }).catch(error => {
       console.error(`Post product: ${error.message}`)
-      response.status(500).send(error.message);
+      response.status(500).send({"error": error.message});
     })
   }
 }

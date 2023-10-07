@@ -12,7 +12,7 @@ class ProductRepository implements IProductRepository {
     try {
       const clientCreated = this.repository.create(product);
       await this.repository.save(clientCreated);
-      return product.id
+      return clientCreated.id
     } catch (error) {
       const message = "Error on saving product in database"
       console.error(`${message}: ${error.message}`)
