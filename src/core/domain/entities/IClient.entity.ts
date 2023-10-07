@@ -5,7 +5,7 @@ interface IClient {
   cpf?: string;
   name?: string;
   email?: string;
-  orders: IOrder[];
+  orders?: IOrder[];
 }
 
 export { IClient };

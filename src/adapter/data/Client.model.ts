@@ -28,10 +28,11 @@ class Client implements IClient {
     name: "email",
     type: "varchar",
     nullable: true,
+    unique: true,
   })
   email?: string;
   @OneToMany(() => Order, (order) => order.client)
-  orders: IOrder[];
+  orders?: IOrder[];
 
   constructor() {
     if (!this.id) {

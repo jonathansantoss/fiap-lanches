@@ -8,7 +8,9 @@ class CreateClientController {
     const createClientUseCase: ICreateClientUseCase =
       container.resolve<ICreateClientUseCase>(CreateClientUseCase);
 
-    response.status(200).send("pong");
+    createClientUseCase.execute(request.body);
+
+    response.status(200).send();
   }
 }
 
