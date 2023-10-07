@@ -7,10 +7,11 @@ import { IProductRepository } from "../../ports/out/product/IProduct.repository"
 class CreateProductUseCase implements ICreateProductUseCase {
   constructor(
     @inject("ProductRepository") private productRepository: IProductRepository
-  ) {}
+  ) { }
 
-  execute(product: IProduct): void {
-    this.productRepository.save(product);
+
+  execute(product: IProduct): Promise<string> {
+    return this.productRepository.save(product);
   }
 }
 

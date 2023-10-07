@@ -5,8 +5,8 @@ import { productRouter } from "./product/product.routes";
 
 const router = Router();
 
-router.use("/api/v1/clients", clientRouter);
-router.use("/api/v1/orders", orderRouter);
-router.use("/api/v1/products", productRouter);
+router.use("/api/v1/client", clientRouter);
+router.use("/api/v1/order", orderRouter);
+router.use("/api/v1/product", productRouter);
 
 export { router };
