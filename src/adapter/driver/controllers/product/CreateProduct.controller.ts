@@ -8,7 +8,12 @@ class CreateProductController {
     const createProductUseCase: ICreateProductUseCase =
       container.resolve<ICreateProductUseCase>(CreateProductUseCase);
 
-    response.status(200).send("pong");
+    createProductUseCase.execute(request.body).then(resp => {
+      response.status(200).send({"productId": resp})
+    }).catch(error => {
+      console.error(`Post product: ${error.message}`)
+      response.status(500).send({"error": error.message});
+    })
   }
 }
 

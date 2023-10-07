@@ -10,8 +10,9 @@ class ProductRepository implements IProductRepository {
 
   async save(product: IProduct): Promise<string> {
     try {
-      await this.repository.save(product)
-      return product.id
+      const clientCreated = this.repository.create(product);
+      await this.repository.save(clientCreated);
+      return clientCreated.id
     } catch (error) {
       const message = "Error on saving product in database"
       console.error(`${message}: ${error.message}`)
