@@ -1,7 +1,7 @@
 import { IOrderRepository } from "../../../../core/applications/ports/out/order/IOrder.repository";
 import { IOrder } from "../../../../core/domain/entities/IOrder.entity";
 import { Repository } from "typeorm";
-import { AppDataSource } from "../config/DataSource";
+import { AppDataSource } from "../../../../config/DataSource";
 import { Order } from "../../../data/Order.model";
 
 class OrderRepository implements IOrderRepository {

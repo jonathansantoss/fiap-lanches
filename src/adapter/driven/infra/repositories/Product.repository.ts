@@ -1,9 +1,11 @@
 import { IProductRepository } from "../../../../core/applications/ports/out/product/IProduct.repository";
 import { IProduct } from "../../../../core/domain/entities/IProduct.entity";
 import { Repository } from "typeorm";
-import { AppDataSource } from "../config/DataSource";
+import { AppDataSource } from "../../../../config/DataSource";
 import { Product } from "../../../data/Product.model";
 import { EProductCategory } from "../../../../core/domain/enums/EProductCategory";
+import { logger } from '../../../../config/WinstonLog';
+
 
 class ProductRepository implements IProductRepository {
   private repository: Repository<Product> =
@@ -16,7 +18,7 @@ class ProductRepository implements IProductRepository {
       return resp.id
     }).catch(error => {
       const message = `Error on ${product.id ? "updating" : "creating"} product in database`
-      console.error(`${message}: ${error.message}`)
+      logger.error(`${message}: ${error.message}`)
       throw new Error(message)
     });
   }
@@ -30,7 +32,7 @@ class ProductRepository implements IProductRepository {
       return resp
     }).catch(error => {
       const message = "Error getting product from database"
-      console.error(`${message}: ${error.message}`)
+      logger.error(`${message}: ${error.message}`)
       throw new Error(message)
     });
   }
@@ -38,7 +40,7 @@ class ProductRepository implements IProductRepository {
   async delete(id: string): Promise<void> {
     await this.repository.delete({ id }).then(result => {}).catch(error => {
       const message = `Error deleting product (${id}) from database`
-      console.error(`${message}: ${error.message}`)
+      logger.error(`${message}: ${error.message}`)
       throw new Error(message)
     });
   }

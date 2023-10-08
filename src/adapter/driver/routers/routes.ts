@@ -3,6 +3,18 @@ import { clientRouter } from "./client/client.routes";
 import { orderRouter } from "./order/order.routes";
 import { productRouter } from "./product/product.routes";
 
+
+
+/**
+ * @swagger
+ * tags:
+ *   - name: Products
+ *     description: Endpints to control products
+ *   - name: Clients
+ *     description: Endpints to control clients
+ *   - name: Orders
+ *     description: Endpints to control orders
+ */
 const router = Router();
 
 router.use("/api/v1/client", clientRouter);

@@ -2,6 +2,7 @@ import { container } from "tsyringe";
 import { DeleteProductUseCase } from "../../../../core/applications/usecases/product/DeleteProductUseCase";
 import { Request, Response } from "express";
 import { IDeleteProductUseCase } from "../../../../core/applications/ports/in/product/IDeleteProductUseCase";
+import { logger } from '../../../../config/WinstonLog';
 
 class DeleteProductController {
     handler(request: Request, response: Response) {
@@ -12,7 +13,7 @@ class DeleteProductController {
             response.status(204).send()
         }
         ).catch(error => {
-            console.error(`Delete product: ${error.message}`)
+            logger.error(`Delete product: ${error.message}`)
             response.status(500).send({ "error": error.message });
         })
 
