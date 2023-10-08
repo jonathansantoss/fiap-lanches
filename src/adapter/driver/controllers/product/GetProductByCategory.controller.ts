@@ -10,7 +10,7 @@ class GetProductByCategoryController {
       container.resolve<IGetProductByCategoryUseCase>(GetProductByCategoryUseCase);
 
     createGetProductUseCase.execute(request.query.category as EProductCategory).then(resp => {
-      response.status(200).send(resp)
+      response.status(200).send({ "message": "Products found", "products": resp })
     }).catch(error => {
       console.error(`Get product by category: ${error.message}`)
       response.status(500).send({ "error": error.message });

@@ -20,10 +20,10 @@ class ProductRepository implements IProductRepository {
     });
   }
 
-  async getByCategory(item: EProductCategory): Promise<IProduct[]> {
+  async getByCategory(category: EProductCategory): Promise<IProduct[]> {
     return await this.repository.find({
       where: {
-        category: item,
+        category,
       },
     }).then(resp => {
       return resp
@@ -33,6 +33,17 @@ class ProductRepository implements IProductRepository {
       throw new Error(message)
     });
   }
+
+  async delete(id: string): Promise<void> {
+    await this.repository.delete({ id }).then(result => {}).catch(error => {
+      const message = `Error deleting product (${id}) from database`
+      console.error(`${message}: ${error.message}`)
+      throw new Error(message)
+    });
+  }
+
 }
+
+
 
 export { ProductRepository };
