@@ -1,18 +1,18 @@
 import { injectable, inject } from "tsyringe";
 import { IProduct } from "../../../domain/entities/IProduct.entity";
-import { ICreateProductUseCase } from "../../ports/in/product/ICreateProductUseCase";
 import { IProductRepository } from "../../ports/out/product/IProduct.repository";
+import { ICreateOrUpdateProductUseCase } from "../../ports/in/product/ICreateOrUpdateProductUseCase";
 
 @injectable()
-class CreateProductUseCase implements ICreateProductUseCase {
+class CreateOrUpdateProductUseCase implements ICreateOrUpdateProductUseCase {
   constructor(
     @inject("ProductRepository") private productRepository: IProductRepository
   ) { }
 
 
   execute(product: IProduct): Promise<string> {
-    return this.productRepository.save(product);
+    return this.productRepository.saveOrUpdate(product);
   }
 }
 
-export { CreateProductUseCase };
+export { CreateOrUpdateProductUseCase };

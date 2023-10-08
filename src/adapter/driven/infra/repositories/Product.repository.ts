@@ -9,12 +9,13 @@ class ProductRepository implements IProductRepository {
   private repository: Repository<Product> =
     AppDataSource.getRepository(Product);
 
-  async save(product: IProduct): Promise<string> {
-    const clientCreated = this.repository.create(product);
-    return await this.repository.save(clientCreated).then(resp => {
+  async saveOrUpdate(product: IProduct): Promise<string> {
+    const productCreated = !product.id ? this.repository.create(product) : product;
+
+    return await this.repository.save(productCreated).then(resp => {
       return resp.id
     }).catch(error => {
-      const message = "Error on saving product in database"
+      const message = `Error on ${product.id ? "updating" : "creating"} product in database`
       console.error(`${message}: ${error.message}`)
       throw new Error(message)
     });
