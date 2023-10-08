@@ -1,7 +1,7 @@
 import { z } from "zod";
-import { EProductCategory } from "../../../core/domain/enums/EProductCategory";
+import { EProductCategory } from "../../../../core/domain/enums/EProductCategory";
 
-const productSchema = z
+const SaveProductSchema = z
   .object({
     name: z.string(),
     value: z.number(),
@@ -14,4 +14,4 @@ const productSchema = z
   })
   .required();
 
-export { productSchema };
+export { SaveProductSchema };
