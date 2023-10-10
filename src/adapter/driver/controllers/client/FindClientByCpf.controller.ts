@@ -11,6 +11,10 @@ class FindClientByCpfController {
 
     const client = await findClientByCpfUseCase.execute(cpf);
 
+    if (!client) {
+      return response.status(404).send("Nout found client!");
+    }
+
     return response.status(200).send(client);
   }
 }
