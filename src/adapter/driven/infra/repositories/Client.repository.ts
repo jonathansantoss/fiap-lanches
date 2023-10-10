@@ -11,6 +11,28 @@ class ClientRepository implements IClientRepository {
     const clientCreated = this.repository.create(Client);
     this.repository.save(clientCreated);
   }
+
+  async delete(cpf: string): Promise<void> {
+    await this.repository.delete({
+      cpf,
+    });
+  }
+
+  async findByCpf(cpf: string): Promise<IClient> {
+    return await this.repository.findOne({
+      where: {
+        cpf,
+      },
+    });
+  }
+
+  async update(Client: IClient): Promise<void> {
+    await this.repository.save(Client);
+  }
+
+  async getAllClients(): Promise<IClient[]> {
+    return await this.repository.find();
+  }
 }
 
 export { ClientRepository };
