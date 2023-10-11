@@ -4,6 +4,16 @@ import { DeleteClientController } from "../../controllers/client/DeleteClient.co
 import { FindClientByCpfController } from "../../controllers/client/FindClientByCpf.controller";
 import { UpdateClientController } from "../../controllers/client/UpdateClient.controller";
 import { ListClientsController } from "../../controllers/client/ListClients.controller";
+import {
+  validateBody,
+  validateParams,
+} from "../../midleware/validator/validate";
+import {
+  createClientSchema,
+  deleteClientSchema,
+  getClientSchema,
+  updateClientSchema,
+} from "../../schemas/ClientSchemas";
 
 const clientRouter = Router();
 const createClientController = new CreateClientController();
@@ -44,7 +54,11 @@ const listClientsController = new ListClientsController();
  *          '500':
  *              description: Internal server error
  */
-clientRouter.post("/", createClientController.handler);
+clientRouter.post(
+  "/",
+  validateBody(createClientSchema),
+  createClientController.handler
+);
 /**
  * @swagger
  * /api/v1/client/{cpf}:
@@ -69,7 +83,11 @@ clientRouter.post("/", createClientController.handler);
  *          '500':
  *            description: Internal server error
  */
-clientRouter.delete("/:cpf", deleteClientController.handler);
+clientRouter.delete(
+  "/:cpf",
+  validateParams(deleteClientSchema),
+  deleteClientController.handler
+);
 /**
  * @swagger
  * /api/v1/client/{cpf}:
@@ -165,7 +183,11 @@ clientRouter.delete("/:cpf", deleteClientController.handler);
  *          '500':
  *              description: Internal server error
  */
-clientRouter.get("/:cpf", findClientByCpfController.handler);
+clientRouter.get(
+  "/:cpf",
+  validateParams(getClientSchema),
+  findClientByCpfController.handler
+);
 /**
  * @swagger
  * /api/v1/client:
@@ -203,7 +225,11 @@ clientRouter.get("/:cpf", findClientByCpfController.handler);
  *          '500':
  *              description: Internal server error
  */
-clientRouter.put("/", updateClientController.handler);
+clientRouter.put(
+  "/",
+  validateBody(updateClientSchema),
+  updateClientController.handler
+);
 /**
  * @swagger
  * /api/v1/client:
