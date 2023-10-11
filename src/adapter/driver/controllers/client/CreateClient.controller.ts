@@ -10,7 +10,7 @@ class CreateClientController {
 
     createClientUseCase.execute(request.body);
 
-    response.status(200).send();
+    response.status(200).send("Client saved with success");
   }
 }
 

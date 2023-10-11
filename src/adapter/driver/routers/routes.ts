@@ -9,11 +9,11 @@ import { productRouter } from "./product/product.routes";
  * @swagger
  * tags:
  *   - name: Products
- *     description: Endpints to control products
+ *     description: Endpoints to control products
  *   - name: Clients
- *     description: Endpints to control clients
+ *     description: Endpoints to control clients
  *   - name: Orders
- *     description: Endpints to control orders
+ *     description: Endpoints to control orders
  */
 const router = Router();
 
