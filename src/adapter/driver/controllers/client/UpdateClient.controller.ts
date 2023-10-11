@@ -23,7 +23,7 @@ class UpdateClientController {
 
     await updateClientUseCase.execute(request.body);
 
-    return response.status(200).send();
+    return response.status(200).send("Client updated with success");
   }
 }
 

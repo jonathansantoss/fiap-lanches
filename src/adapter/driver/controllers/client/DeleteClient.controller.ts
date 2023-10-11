@@ -23,7 +23,7 @@ class DeleteClientController {
 
     await deleteClientUseCase.execute(cpf);
 
-    return response.status(200).send();
+    return response.status(200).send("Client was deleted with success");
   }
 }
 
