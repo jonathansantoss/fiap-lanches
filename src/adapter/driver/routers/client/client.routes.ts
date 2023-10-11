@@ -143,9 +143,11 @@ clientRouter.delete("/:cpf", deleteClientController.handler);
  *                                              description: Order's products.
  *                                          startedAt:
  *                                              type: string
+ *                                              format:	date-time
  *                                              description: Order's startedAt.
  *                                          deliveredAt:
  *                                              type: string
+ *                                              format:	date-time
  *                                              description: Order's deliveredAt.
  *                                          status:
  *                                              type: string
@@ -270,9 +272,11 @@ clientRouter.put("/", updateClientController.handler);
  *                                                  description: Order's products.
  *                                              startedAt:
  *                                                  type: string
+ *                                                  format:	date-time
  *                                                  description: Order's startedAt.
  *                                              deliveredAt:
  *                                                  type: string
+ *                                                  format:	date-time
  *                                                  description: Order's deliveredAt.
  *                                              status:
  *                                                  type: string
