@@ -11,6 +11,7 @@ class CreateOrUpdateProductUseCase implements ICreateOrUpdateProductUseCase {
 
 
   execute(product: IProduct): Promise<string> {
+    product.createdAt = new Date();
     return this.productRepository.saveOrUpdate(product);
   }
 }

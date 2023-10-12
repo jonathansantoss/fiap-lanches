@@ -27,11 +27,6 @@ class Order implements IOrder {
   })
   value: number;
 
-  @Column({
-    name: "products",
-    type: "int",
-    nullable: false,
-  })
   @ManyToMany(() => Product, (product) => product.orders)
   @JoinTable()
   products: Product[];
@@ -49,7 +44,7 @@ class Order implements IOrder {
   @Column({
     name: "delivered_at",
     type: "date",
-    nullable: false,
+    nullable: true,
   })
   deliveredAt: Date;
 

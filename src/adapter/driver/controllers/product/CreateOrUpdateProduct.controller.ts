@@ -12,7 +12,7 @@ class CreateOrUpdateProductController {
     createProductUseCase.execute(request.body).then(resp => {
       response.status(request.body.id ? 200 : 201).send({"message": `Product ${request.body.id ? 'updated' : 'created'}`, "productId": resp})
     }).catch(error => {
-      logger.error(`Post product: ${error.message}`)
+      logger.error(`Post/Put product: ${error.message}`)
       response.status(500).send({"error": error.message});
     })
   }

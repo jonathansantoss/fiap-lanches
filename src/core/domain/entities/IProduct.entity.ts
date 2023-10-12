@@ -7,6 +7,8 @@ interface IProduct {
   value: number;
   amount: number;
   orders: IOrder[];
+  createdAt: Date;
+  updatedAt: Date;
   category: EProductCategory;
 }
 
