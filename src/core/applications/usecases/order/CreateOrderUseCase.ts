@@ -26,7 +26,7 @@ class CreateOrderUseCase implements ICreateOrderUseCase {
       client: client
     } as IOrder
 
-    return this.orderRepository.save(order_created);
+    return this.orderRepository.saveOrUpdate(order_created);
   }
 }
 

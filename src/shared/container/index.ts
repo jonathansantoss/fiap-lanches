@@ -11,6 +11,8 @@ import { IGetProductByIdsUseCase } from "../../core/applications/ports/in/produc
 import { GetProductByIdsUseCase } from "../../core/applications/usecases/product/GetProductByIdsUseCase";
 import { IFindClientByCpfUseCase } from "../../core/applications/ports/in/client/IFindClientByCpfUseCase";
 import { FindClientByCpfUseCase } from "../../core/applications/usecases/client/FindClientByCpfUseCase";
+import { IGetOrderByIdUseCase } from "../../core/applications/ports/in/order/IGetOrderByIdUseCase";
+import { GetOrderByIdUseCase } from "../../core/applications/usecases/order/GetOrderByIdUseCase";
 
 container.registerSingleton<IProductRepository>(
   "ProductRepository",
@@ -41,6 +43,17 @@ container.registerSingleton<IGetProductByIdsUseCase>(
   "GetProductByIdsUseCase",
   GetProductByIdsUseCase
 );
+
+container.registerSingleton<IGetProductByIdsUseCase>(
+  "GetProductByIdsUseCase",
+  GetProductByIdsUseCase
+);
+
+container.registerSingleton<IGetOrderByIdUseCase>(
+  "GetOrderByIdUseCase",
+  GetOrderByIdUseCase
+);
+
 
 
 export { container };
