@@ -1,8 +1,9 @@
 import { Router } from "express";
 import { CreateOrderController } from "../../controllers/order/CreateOrder.controller";
 import { validateBody, validateQuery } from "../../midleware/validator/validate";
-import { SaveOrderSchema, UpdateStatusSchema } from "../../schemas/OrderSchemas";
+import { GetByStatusSchema, SaveOrderSchema, UpdateStatusSchema } from "../../schemas/OrderSchemas";
 import { UpdateOrderStatusController } from "../../controllers/order/UpdateOrderStatus.controller";
+import { GetOrderByStatusController } from "../../controllers/order/GetOrderByStatus";
 
 const orderRouter = Router();
 
@@ -55,7 +56,7 @@ orderRouter.post("/",
  *   put:
  *     summary: Update order status
  *     tags:
- *       - Products
+ *       - Orders
  *     description: Update order status based in payload provided.
  *     parameters:
  *       - in: query
@@ -63,16 +64,16 @@ orderRouter.post("/",
  *         required: true
  *         schema:
  *           type: string
- *         description: Product category that is going to be recovered
+ *         description: Order id that is going to be updated
  *       - in: query
  *         name: status
  *         required: true
  *         schema:
  *           type: string
- *         description: Product category that is going to be recovered
+ *         description: Order category that is going to be updated
  *     responses:
  *       '200':
- *         description: Product list recovered with success.
+ *         description: Order updated
  *       '400':
  *         description: Bad payload given to API
  *       '404':
@@ -84,5 +85,32 @@ orderRouter.put("/",
     validateQuery(UpdateStatusSchema),
     new UpdateOrderStatusController().handler);
 
+
+/**
+* @swagger
+ * /api/v1/order:
+ *   get:
+ *     summary: Get order by status
+ *     tags:
+ *       - Orders
+ *     description: Update order status based in payload provided.
+ *     parameters:
+ *       - in: query
+ *         name: status
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Order status that is going to be recovered
+ *     responses:
+ *       '200':
+ *         description: Order list recovered with success.
+ *       '400':
+ *         description: Bad payload given to API
+ *       '500':
+ *         description: Internal server error
+ */
+orderRouter.get("/",
+    validateQuery(GetByStatusSchema),
+    new GetOrderByStatusController().handler);
 
 export { orderRouter };

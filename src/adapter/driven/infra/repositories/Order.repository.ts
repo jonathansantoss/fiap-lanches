@@ -4,6 +4,7 @@ import { Repository } from "typeorm";
 import { AppDataSource } from "../../../../config/DataSource";
 import { Order } from "../../../data/Order.model";
 import { logger } from '../../../../config/WinstonLog';
+import { EOrderStatus } from "../../../../core/domain/enums/EOrderStatus";
 
 class OrderRepository implements IOrderRepository {
   private repository: Repository<Order> = AppDataSource.getRepository(Order);
@@ -33,6 +34,21 @@ class OrderRepository implements IOrderRepository {
       throw new Error(message)
     });
   }
+
+  async getByStatus(status: EOrderStatus): Promise<IOrder[]> {
+    return await this.repository.find({
+      where: {
+        status,
+      },
+    }).then(resp => {
+      return resp
+    }).catch(error => {
+      const message = "Error getting order from database"
+      logger.error(`${message}: ${error.message}`)
+      throw new Error(message)
+    });
+  }
+
 }
 
 export { OrderRepository };

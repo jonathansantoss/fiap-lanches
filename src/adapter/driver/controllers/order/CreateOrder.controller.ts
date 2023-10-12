@@ -13,7 +13,7 @@ class CreateOrderController {
       response.status(200).send({ "message": "Order created", "orderId": resp });
     }
     ).catch(error => {
-      logger.error(`Post product: ${error.message}`)
+      logger.error(`Post order: ${error.message}`)
       response.status(500).send({ "error": error.message });
     })
   }

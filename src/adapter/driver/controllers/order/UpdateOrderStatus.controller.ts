@@ -14,7 +14,7 @@ class UpdateOrderStatusController {
             response.status(200).send({ "message": "Order updated", "orderId": resp });
         }
         ).catch(error => {
-            logger.error(`Post product: ${error.message}`)
+            logger.error(`Put order status: ${error.message}`)
             error.status ? response.status(error.status).send({ "error": error.message }) : response.status(500).send({ "error": error.message });
         })
     }
