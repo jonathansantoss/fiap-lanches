@@ -44,6 +44,20 @@ class Product implements IProduct {
   })
   category: EProductCategory;
 
+  @Column({
+    name: "created_at",
+    type: "date",
+    nullable: false,
+  })
+  createdAt: Date;
+
+  @Column({
+    name: "updated_at",
+    type: "date",
+    nullable: true,
+  })
+  updatedAt: Date;
+
   constructor() {
     if (!this.id) {
       this.id = UuidV4();

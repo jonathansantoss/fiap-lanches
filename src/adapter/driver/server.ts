@@ -7,9 +7,9 @@ const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
-app.use((err, req, res, next) => {
-  res.status(500).json({ error: "Internal Server Error" });
-});
+// app.use((err, req, res, next) => {
+//   res.status(500).json({ error: "Internal Server Error" });
+// });
 
 app.listen(port, () => {
   logger.info(`Server is running on port ${port}`);

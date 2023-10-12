@@ -1,6 +1,6 @@
 import { IProductRepository } from "../../../../core/applications/ports/out/product/IProduct.repository";
 import { IProduct } from "../../../../core/domain/entities/IProduct.entity";
-import { Repository } from "typeorm";
+import { In, Repository } from "typeorm";
 import { AppDataSource } from "../../../../config/DataSource";
 import { Product } from "../../../data/Product.model";
 import { EProductCategory } from "../../../../core/domain/enums/EProductCategory";
@@ -38,8 +38,37 @@ class ProductRepository implements IProductRepository {
   }
 
   async delete(id: string): Promise<void> {
-    await this.repository.delete({ id }).then(result => {}).catch(error => {
+    await this.repository.delete({ id }).then(result => { }).catch(error => {
       const message = `Error deleting product (${id}) from database`
+      logger.error(`${message}: ${error.message}`)
+      throw new Error(message)
+    });
+  }
+
+
+  async getById(id: string): Promise<IProduct> {
+    return await this.repository.findOne({
+      where: {
+        id,
+      },
+    }).then(resp => {
+      return resp
+    }).catch(error => {
+      const message = "Error getting product from database"
+      logger.error(`${message}: ${error.message}`)
+      throw new Error(message)
+    });
+  }
+
+  async getByIds(ids: string[]): Promise<IProduct[]> {
+    return await this.repository.find({
+      where: {
+        id: In(ids)
+      },
+    }).then(resp => {
+      return resp
+    }).catch(error => {
+      const message = "Error getting products from database"
       logger.error(`${message}: ${error.message}`)
       throw new Error(message)
     });
