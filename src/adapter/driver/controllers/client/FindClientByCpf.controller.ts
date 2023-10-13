@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { container } from "../../../../shared/container";
+import { redis } from "../../../../config/RedisConfig";
 import { IFindClientByCpfUseCase } from "../../../../core/applications/ports/in/client/IFindClientByCpfUseCase";
 import { FindClientByCpfUseCase } from "../../../../core/applications/usecases/client/FindClientByCpfUseCase";
 

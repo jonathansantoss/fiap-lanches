@@ -3,6 +3,7 @@ import { IClient } from "../../../../core/domain/entities/IClient.entity";
 import { Client } from "../../../data/Client.model";
 import { AppDataSource } from "../../../../config/DataSource";
 import { Repository } from "typeorm";
+import { redis } from "../../../../config/RedisConfig";
 
 class ClientRepository implements IClientRepository {
   private repository: Repository<Client> = AppDataSource.getRepository(Client);
@@ -19,11 +20,22 @@ class ClientRepository implements IClientRepository {
   }
 
   async findByCpf(cpf: string): Promise<IClient> {
-    return await this.repository.findOne({
+    const clientRedis = await redis.get("client:" + cpf);
+
+    if (clientRedis !== null) {
+      return JSON.parse(clientRedis) as IClient;
+    }
+
+    const client = await this.repository.findOne({
       where: {
         cpf,
       },
     });
+
+    await redis.set("client:" + cpf, JSON.stringify(client));
+    await redis.expire("client:" + cpf, 1000);
+
+    return client;
   }
 
   async update(Client: IClient): Promise<void> {
