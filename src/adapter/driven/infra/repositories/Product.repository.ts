@@ -5,7 +5,7 @@ import { AppDataSource } from "../../../../config/DataSource";
 import { Product } from "../../../data/Product.model";
 import { EProductCategory } from "../../../../core/domain/enums/EProductCategory";
 import { logger } from '../../../../config/WinstonLog';
-
+import { redis } from "../../../../config/RedisConfig";
 
 class ProductRepository implements IProductRepository {
   private repository: Repository<Product> =
@@ -24,11 +24,19 @@ class ProductRepository implements IProductRepository {
   }
 
   async getByCategory(category: EProductCategory): Promise<IProduct[]> {
-    return await this.repository.find({
+    const productRedis = await redis.get("productCategory:" + category);
+
+    if (productRedis !== null) {
+      return Promise.resolve(JSON.parse(productRedis)) as Promise<IProduct[]>;
+    }
+
+    await this.repository.find({
       where: {
         category,
       },
-    }).then(resp => {
+    }).then(async (resp) => {
+      await redis.set("productCategory:" + category, JSON.stringify(resp));
+      await redis.expire("productCategory:" + category, 1000);
       return resp
     }).catch(error => {
       const message = "Error getting product from database"
@@ -47,11 +55,19 @@ class ProductRepository implements IProductRepository {
 
 
   async getById(id: string): Promise<IProduct> {
+    const productRedis = await redis.get("productId:" + id);
+
+    if (productRedis !== null) {
+      return Promise.resolve(JSON.parse(productRedis)) as Promise<IProduct>;
+    }
+
     return await this.repository.findOne({
       where: {
         id,
       },
-    }).then(resp => {
+    }).then(async (resp) => {
+      await redis.set("productId:" + resp.id, JSON.stringify(resp));
+      await redis.expire("productId:" + resp.id, 1000);
       return resp
     }).catch(error => {
       const message = "Error getting product from database"
