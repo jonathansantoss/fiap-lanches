@@ -13,6 +13,8 @@ import { IFindClientByCpfUseCase } from "../../core/applications/ports/in/client
 import { FindClientByCpfUseCase } from "../../core/applications/usecases/client/FindClientByCpfUseCase";
 import { IGetOrderByIdUseCase } from "../../core/applications/ports/in/order/IGetOrderByIdUseCase";
 import { GetOrderByIdUseCase } from "../../core/applications/usecases/order/GetOrderByIdUseCase";
+import { IEmployeeRepository } from "../../core/applications/ports/out/employee/IEmployee.repository";
+import { EmployeeRepository } from "../../adapter/driven/infra/repositories/Employee.repository";
 
 container.registerSingleton<IProductRepository>(
   "ProductRepository",
@@ -27,6 +29,11 @@ container.registerSingleton<IOrderRepository>(
 container.registerSingleton<IClientRepository>(
   "ClientRepository",
   ClientRepository
+);
+
+container.registerSingleton<IEmployeeRepository>(
+  "EmployeeRepository",
+  EmployeeRepository
 );
 
 container.registerSingleton<IFindClientByCpfUseCase>(
@@ -53,7 +60,5 @@ container.registerSingleton<IGetOrderByIdUseCase>(
   "GetOrderByIdUseCase",
   GetOrderByIdUseCase
 );
-
-
 
 export { container };
