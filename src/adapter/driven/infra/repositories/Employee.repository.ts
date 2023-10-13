@@ -26,6 +26,14 @@ class EmployeeRepository implements IEmployeeRepository {
   async getAll(): Promise<IEmployee[]> {
     return await this.repository.find();
   }
+
+  async findByCpf(cpf: string): Promise<IEmployee> {
+    return await this.repository.findOne({
+      where: {
+        cpf,
+      },
+    });
+  }
 }
 
 export { EmployeeRepository };
