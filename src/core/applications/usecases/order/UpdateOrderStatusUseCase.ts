@@ -17,7 +17,7 @@ class UpdateOrderStatusUseCase implements IUpdateOrderStatusUseCase {
     const order: IOrder = await this.getOrderByIdUseCase.execute(orderId).then(resp => resp);
 
     if (!order) {
-        new CustomError(`Order ${orderId} not found`, 404) 
+        throw new CustomError(`Order ${orderId} not found`, 404) 
     }
 
     order.status = status

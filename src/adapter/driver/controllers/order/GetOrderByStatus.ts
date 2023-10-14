@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { container } from "../../../../shared/container";
 import { logger } from '../../../../config/WinstonLog';
 import { IGetOrderByStatusUseCase } from "../../../../core/applications/ports/in/order/IGetOrderByStatusUseCase";
-import { GetOrderByStatusUseCase } from "../../../../core/applications/usecases/order/GetProductByCategoryUseCase";
+import { GetOrderByStatusUseCase } from "../../../../core/applications/usecases/order/GetOrderByStatusUseCase";
 import { EOrderStatus } from "../../../../core/domain/enums/EOrderStatus";
 
 class GetOrderByStatusController {
