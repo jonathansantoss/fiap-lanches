@@ -39,13 +39,13 @@ const listClientsController = new ListClientsController();
  *                      properties:
  *                          cpf:
  *                              type: string
- *                              description: Client's name.
+ *                              description: Client's cpf.
  *                          name:
  *                              type: string
  *                              description: Client's name.
  *                          email:
  *                              type: string
- *                              description: Client's name.
+ *                              description: Client's email.
  *      responses:
  *          '201':
  *              description: Client saved with success
@@ -250,16 +250,16 @@ clientRouter.put(
  *                              properties:
  *                                  id:
  *                                      type: string
- *                                      description: Client's name.
+ *                                      description: Client's id.
  *                                  cpf:
  *                                      type: string
- *                                      description: Client's name.
+ *                                      description: Client's cpf.
  *                                  name:
  *                                      type: string
  *                                      description: Client's name.
  *                                  email:
  *                                      type: string
- *                                      description: Client's name.
+ *                                      description: Client's email.
  *                                  orders:
  *                                      type: array
  *                                      items:
