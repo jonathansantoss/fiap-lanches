@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { inject, injectable } from "tsyringe";
 import { IEmployee } from "../../../domain/entities/IEmployee";
 import { ICreateEmployeeUseCase } from "../../ports/in/employee/ICreateEmployeeUseCase";
