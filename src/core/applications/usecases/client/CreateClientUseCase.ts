@@ -16,7 +16,7 @@ class CreateClientUseCase implements ICreateClientUseCase {
     const clientFound = await this.findClientByCpf.execute(client.cpf).then(resp => resp)
 
     if(clientFound) {
-      throw new CustomError("Client already exists", 409)
+      throw new CustomError(`Client ${client.cpf} already exists`, 409)
     }
 
     this.clientRepository.save(client);
