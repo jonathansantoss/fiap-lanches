@@ -15,7 +15,7 @@ class UpdateOrderStatusController {
         }
         ).catch(error => {
             logger.error(`Put order status: ${error.message}`)
-            error.status ? response.status(error.status).send({ "error": error.message }) : response.status(500).send({ "error": error.message });
+            response.status(error.status ? error.status : 500).send({ "error": error.message })
         })
     }
 }
