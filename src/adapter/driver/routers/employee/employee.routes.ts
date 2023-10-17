@@ -3,6 +3,15 @@ import { CreateEmployeeController } from "../../controllers/employee/CreateEmplo
 import { DeleteEmployeeController } from "../../controllers/employee/DeleteEmployee.controller";
 import { UpdateEmployeeController } from "../../controllers/employee/UpdateEmployee.controller";
 import { ListEmployeesController } from "../../controllers/employee/ListEmployees.controller";
+import {
+  validateBody,
+  validateParams,
+} from "../../midleware/validator/validate";
+import {
+  createEmployeeSchema,
+  deleteEmployeeSchema,
+  updateEmployeeSchema,
+} from "../../schemas/EmpoyeeSchemas";
 
 const employeeRouter = Router();
 const createEmployeeController = new CreateEmployeeController();
@@ -42,7 +51,11 @@ const listEmployeesController = new ListEmployeesController();
  *          '500':
  *              description: Internal server error
  */
-employeeRouter.post("/", createEmployeeController.handler);
+employeeRouter.post(
+  "/",
+  validateBody(createEmployeeSchema),
+  createEmployeeController.handler
+);
 /**
  * @swagger
  * /api/v1/employees/{cpf}:
@@ -67,7 +80,11 @@ employeeRouter.post("/", createEmployeeController.handler);
  *          '500':
  *            description: Internal server error
  */
-employeeRouter.delete("/:cpf", deleteEmployeeController.handler);
+employeeRouter.delete(
+  "/:cpf",
+  validateParams(deleteEmployeeSchema),
+  deleteEmployeeController.handler
+);
 /**
  * @swagger
  * /api/v1/employees:
@@ -105,7 +122,11 @@ employeeRouter.delete("/:cpf", deleteEmployeeController.handler);
  *          '500':
  *              description: Internal server error
  */
-employeeRouter.put("/", updateEmployeeController.handler);
+employeeRouter.put(
+  "/",
+  validateBody(updateEmployeeSchema),
+  updateEmployeeController.handler
+);
 /**
  * @swagger
  * /api/v1/employees:
