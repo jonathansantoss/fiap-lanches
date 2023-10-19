@@ -1,4 +1,5 @@
 import { EOrderStatus } from "../enums/EOrderStatus";
+import { EOrderPayment } from "../enums/EPayment";
 import { IClient } from "./IClient.entity";
 import { IProduct } from "./IProduct.entity";
 
@@ -9,6 +10,7 @@ interface IOrder {
   startedAt: Date;
   deliveredAt: Date;
   status: EOrderStatus;
+  payment?: EOrderPayment;
   client: IClient;
 }
 

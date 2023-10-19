@@ -11,6 +11,7 @@ import { v4 as UuidV4 } from "uuid";
 import { IOrder } from "../../core/domain/entities/IOrder.entity";
 import { EOrderStatus } from "../../core/domain/enums/EOrderStatus";
 import { Client } from "./Client.model";
+import { EOrderPayment } from "../../core/domain/enums/EPayment";
 
 @Entity("order")
 class Order implements IOrder {
@@ -50,10 +51,21 @@ class Order implements IOrder {
 
   @Column({
     name: "status",
-    type: "varchar",
+    type: "enum",
+    enum: EOrderStatus,
     nullable: false,
+    default: EOrderStatus.RECEIVED,
   })
   status: EOrderStatus;
+
+  @Column({
+    name: "order_payment",
+    type: "enum",
+    enum: EOrderPayment,
+    nullable: false,
+    default: EOrderPayment.WAITING,
+  })
+  payment?: EOrderPayment;
 
   constructor() {
     if (!this.id) {

@@ -32,6 +32,10 @@ class ClientRepository implements IClientRepository {
       },
     });
 
+    if (!client) {
+      return client;
+    }
+
     await redis.set("client:" + cpf, JSON.stringify(client));
     await redis.expire("client:" + cpf, 1000);
 
