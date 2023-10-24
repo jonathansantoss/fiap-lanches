@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { CreatePaymentConroller } from "../../controllers/payment/CreatePayment.controller";
+import { UpdatePaymentConroller } from "../../controllers/payment/UpdatePayment.controller";
 import { validateQuery } from "../../midleware/validator/validate";
 import { createPaymentSchema } from "../../schemas/PaymentSchemas";
 
 const paymentRouter = Router();
 
-const createPaymentConroller = new CreatePaymentConroller();
+const updatePaymentConroller = new UpdatePaymentConroller();
 
 /**
 * @swagger
@@ -35,7 +35,7 @@ const createPaymentConroller = new CreatePaymentConroller();
 paymentRouter.put(
   "/",
   validateQuery(createPaymentSchema),
-  createPaymentConroller.handler
+  updatePaymentConroller.handler
 );
 
 export { paymentRouter };
