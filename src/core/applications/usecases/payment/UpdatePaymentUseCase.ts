@@ -1,10 +1,10 @@
 import { inject, injectable } from "tsyringe";
-import { ICreatePaymentUseCase } from "../../ports/in/payment/ICreatePaymentUseCase";
+import { IUpdatePaymentUseCase } from "../../ports/in/payment/IUpdatePaymentUseCase";
 import { IOrderRepository } from "../../ports/out/order/IOrder.repository";
 import { EOrderPayment } from "../../../domain/enums/EPayment";
 
 @injectable()
-class CreatePaymentUseCase implements ICreatePaymentUseCase {
+class UpdatePaymentUseCase implements IUpdatePaymentUseCase {
   constructor(
     @inject("OrderRepository") private orderRepository: IOrderRepository
   ) {}
@@ -17,4 +17,4 @@ class CreatePaymentUseCase implements ICreatePaymentUseCase {
   }
 }
 
-export { CreatePaymentUseCase };
+export { UpdatePaymentUseCase };
