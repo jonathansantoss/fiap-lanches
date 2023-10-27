@@ -1,8 +1,10 @@
-import { Entity, PrimaryColumn, Column, ManyToMany } from "typeorm";
+
+import { Entity, PrimaryColumn, Column, ManyToMany, OneToMany } from "typeorm";
 import { v4 as UuidV4 } from "uuid";
 import { Order } from "./Order.model";
 import { IProduct } from "../../core/domain/entities/IProduct.entity";
 import { EProductCategory } from "../../core/domain/enums/EProductCategory";
+import { Promotion } from "./Promotion.model";
 
 @Entity("product")
 class Product implements IProduct {
@@ -19,6 +21,9 @@ class Product implements IProduct {
   })
   name: string;
 
+  @OneToMany(() => Promotion, promotion => promotion.product)
+  promotions: Promotion[];
+
   @Column({
     name: "value",
     type: "decimal",
@@ -26,6 +31,13 @@ class Product implements IProduct {
   })
   value: number;
 
+  @Column({
+    name: "promotion_value",
+    type: "decimal",
+    nullable: true,
+  })
+  promotionValue: number;
+  
   @Column({
     name: "amount",
     type: "int",
@@ -64,5 +76,4 @@ class Product implements IProduct {
     }
   }
 }
-
 export { Product };

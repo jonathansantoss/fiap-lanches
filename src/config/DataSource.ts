@@ -5,17 +5,18 @@ import { Product } from "../adapter/data/Product.model";
 import { Order } from "../adapter/data/Order.model";
 import { Client } from "../adapter/data/Client.model";
 import { Employee } from "../adapter/data/Employee";
+import { Promotion } from "../adapter/data/Promotion.model";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
-  host: "db",
+  host: "localhost",
   port: 5432,
   username: "postgres",
   password: "mysecretpassword",
   database: "postgres",
   synchronize: true,
   logging: true,
-  entities: [Product, Order, Client, Employee],
+  entities: [Promotion, Product, Order, Client, Employee],
   subscribers: [],
   migrations: [],
 });

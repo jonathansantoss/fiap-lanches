@@ -1,3 +1,4 @@
+
 import { Router } from "express";
 import { validateBody, validateQuery } from "../../midleware/validator/validate";
 import { GetProductByCategorySchema, ProductIdSchema, SaveProductSchema, UpdateProductSchema } from "../../schemas/ProductSchemas";
@@ -22,6 +23,10 @@ const productRouter = Router();
  *           schema:
  *             type: object
  *             properties:
+ *               id:
+ *                 type: string
+ *                 description: Product's id. It is used in case of updates.
+ *                 required: false
  *               name:
  *                 type: string
  *                 description: Product's name.
@@ -37,18 +42,17 @@ const productRouter = Router();
  *                 @enum ['Main Dish', 'Side Dish', 'Drink']
  *     responses:
  *       '201':
- *         description: Product saved with success
+ *         description: Product saved/updated with success
  *       '400':
  *         description: Bad payload given to API
  *       '500':
  *         description: Internal server error
  */
 productRouter.post(
-  "/",
-  validateBody(SaveProductSchema),
-  new CreateOrUpdateProductController().handler
+    "/",
+    validateBody(SaveProductSchema),
+    new CreateOrUpdateProductController().handler
 );
-
 
 /**
  * @swagger
@@ -90,11 +94,10 @@ productRouter.post(
  *         description: Internal server error
  */
 productRouter.put(
-  "/",
-  validateBody(UpdateProductSchema),
-  new CreateOrUpdateProductController().handler
+    "/",
+    validateBody(UpdateProductSchema),
+    new CreateOrUpdateProductController().handler
 );
-
 
 /**
  * @swagger
@@ -120,9 +123,9 @@ productRouter.put(
  *         description: Internal server error
  */
 productRouter.get(
-  "/",
-  validateQuery(GetProductByCategorySchema),
-  new GetProductByCategoryController().handler
+    "/",
+    validateQuery(GetProductByCategorySchema),
+    new GetProductByCategoryController().handler
 );
 
 /**
@@ -149,9 +152,8 @@ productRouter.get(
  *         description: Internal server error
  */
 productRouter.delete(
-  "/",
-  validateQuery(ProductIdSchema),
-  new DeleteProductController().handler
+    "/",
+    validateQuery(ProductIdSchema),
+    new DeleteProductController().handler
 );
-
 export { productRouter };

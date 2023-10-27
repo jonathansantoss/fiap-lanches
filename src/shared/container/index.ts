@@ -15,6 +15,10 @@ import { IGetOrderByIdUseCase } from "../../core/applications/ports/in/order/IGe
 import { GetOrderByIdUseCase } from "../../core/applications/usecases/order/GetOrderByIdUseCase";
 import { IEmployeeRepository } from "../../core/applications/ports/out/employee/IEmployee.repository";
 import { EmployeeRepository } from "../../adapter/driven/infra/repositories/Employee.repository";
+import { IPromotionRepository } from "../../core/applications/ports/out/promotion/IPromotion.repository";
+import { PromotionRepository } from "../../adapter/driven/infra/repositories/Promotion.repository";
+import { IGetActivePromotionsByProductIdUseCase } from "../../core/applications/ports/in/promotion/IGetActivePromotionsByProductIdUseCase";
+import { GetActivePromotionsByProductIdUseCase } from "../../core/applications/usecases/promotion/GetActivePromotionsByProductIdUseCase";
 
 container.registerSingleton<IProductRepository>(
   "ProductRepository",
@@ -29,6 +33,11 @@ container.registerSingleton<IOrderRepository>(
 container.registerSingleton<IClientRepository>(
   "ClientRepository",
   ClientRepository
+);
+
+container.registerSingleton<IPromotionRepository>(
+  "PromotionRepository",
+  PromotionRepository
 );
 
 container.registerSingleton<IEmployeeRepository>(
@@ -59,6 +68,11 @@ container.registerSingleton<IGetProductByIdsUseCase>(
 container.registerSingleton<IGetOrderByIdUseCase>(
   "GetOrderByIdUseCase",
   GetOrderByIdUseCase
+);
+
+container.registerSingleton<IGetActivePromotionsByProductIdUseCase>(
+  "GetActivePromotionsByProductIdUseCase",
+  GetActivePromotionsByProductIdUseCase
 );
 
 export { container };
