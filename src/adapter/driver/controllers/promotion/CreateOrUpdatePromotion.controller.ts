@@ -14,9 +14,9 @@ class CreateOrUpdatePromotionController {
             container.resolve<ICreateOrUpdatePromotionUseCase>(CreateOrUpdatePromotionUseCase);
 
         createOrUpdatePromotion.execute(request.body).then(resp => {
-            response.status(request.body.id ? 200 : 201).send({ "message": `Product ${request.body.id ? 'updated' : 'created'}`, "productId": resp })
+            response.status(request.body.id ? 200 : 201).send({ "message": `Promotion ${request.body.id ? 'updated' : 'created'}`, "id": resp })
         }).catch(error => {
-            logger.error(`Post/Put product: ${error.message}`)
+            logger.error(`Post/Put promotion: ${error.message}`)
             response.status(500).send({ "error": error.message });
         })
     }

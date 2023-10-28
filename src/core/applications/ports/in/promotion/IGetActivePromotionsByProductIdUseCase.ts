@@ -1,7 +1,7 @@
-import { Promotion } from "../../../../../adapter/data/Promotion.model";
+import { IPromotion } from "../../../../domain/entities/IPromotion";
 
 interface IGetActivePromotionsByProductIdUseCase {
-    execute(productId: string): Promise<Promotion[]>;
+    execute(productId: string): Promise<IPromotion[]>;
 }
 
 export { IGetActivePromotionsByProductIdUseCase };

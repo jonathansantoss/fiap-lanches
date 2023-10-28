@@ -19,6 +19,12 @@ import { IPromotionRepository } from "../../core/applications/ports/out/promotio
 import { PromotionRepository } from "../../adapter/driven/infra/repositories/Promotion.repository";
 import { IGetActivePromotionsByProductIdUseCase } from "../../core/applications/ports/in/promotion/IGetActivePromotionsByProductIdUseCase";
 import { GetActivePromotionsByProductIdUseCase } from "../../core/applications/usecases/promotion/GetActivePromotionsByProductIdUseCase";
+import { GetPromotionByIdUseCase } from "../../core/applications/usecases/promotion/GetPromotionByIdUseCase";
+import { IGetPromotionByIdUseCase } from "../../core/applications/ports/in/promotion/IGetPromotionByIdUseCase";
+import { ICancelPromotionUseCase } from "../../core/applications/ports/in/promotion/ICancelPromotionUseCase";
+import { CancelPromotionUseCase } from "../../core/applications/usecases/promotion/CancelPromotionUseCase";
+import { ICreateOrUpdatePromotionUseCase } from "../../core/applications/ports/in/promotion/ICreateOrUpdatePromotionUseCase";
+import { CreateOrUpdatePromotionUseCase } from "../../core/applications/usecases/promotion/CreateOrUpdatePromotionUseCase ";
 
 container.registerSingleton<IProductRepository>(
   "ProductRepository",
@@ -74,5 +80,21 @@ container.registerSingleton<IGetActivePromotionsByProductIdUseCase>(
   "GetActivePromotionsByProductIdUseCase",
   GetActivePromotionsByProductIdUseCase
 );
+
+container.registerSingleton<IGetPromotionByIdUseCase>(
+  "GetPromotionByIdUseCase",
+  GetPromotionByIdUseCase
+);
+
+container.registerSingleton<ICancelPromotionUseCase>(
+  "CancelPromotionUseCase",
+  CancelPromotionUseCase
+);
+
+container.registerSingleton<ICreateOrUpdatePromotionUseCase>(
+  "CreateOrUpdatePromotionUseCase",
+  CreateOrUpdatePromotionUseCase
+);
+
 
 export { container };

@@ -6,3 +6,10 @@ export const SavePromotionSchema = z
     promotionValue: z.number()
   })
   .required();
+
+
+export const ValidatePromotionId = z
+  .object({
+    id: z.string(),
+  })
+  .required();

@@ -15,6 +15,9 @@ class ProductRepository implements IProductRepository {
     const productCreated = !product.id ? this.repository.create(product) : product;
 
     return await this.repository.save(productCreated).then(resp => {
+      if (!resp) {
+        return null;
+      }
       return resp.id
     }).catch(error => {
       const message = `Error on ${product.id ? "updating" : "creating"} product in database`
@@ -60,16 +63,22 @@ class ProductRepository implements IProductRepository {
     if (productRedis !== null) {
       return Promise.resolve(JSON.parse(productRedis)) as Promise<IProduct>;
     }
-
+    
+    console.log(id)
     return await this.repository.findOne({
       where: {
         id,
       },
     }).then(async (resp) => {
+      if(!resp) {
+        return null
+      }
+
       await redis.set("productId:" + resp.id, JSON.stringify(resp));
       await redis.expire("productId:" + resp.id, 1000);
       return resp
     }).catch(error => {
+      console.log(error)
       const message = "Error getting product from database"
       logger.error(`${message}: ${error.message}`)
       throw new Error(message)

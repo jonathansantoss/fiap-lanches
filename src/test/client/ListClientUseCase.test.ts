@@ -30,7 +30,6 @@ describe("ListClientUseCase", () => {
         );
 
         const result = await listClientsUseCase.execute().then(resp => resp);
-        console.log(result)
         expect(result.length).toBe(1);
         expect(mockClientRepository.getAllClients).toHaveBeenCalled();
     });

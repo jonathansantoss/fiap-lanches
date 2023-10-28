@@ -13,7 +13,6 @@ class PromotionRepository implements IPromotionRepository {
 
     async saveOrUpdate(promotion): Promise<string> {
         const promotionCreated = !promotion.id ? this.repository.create(promotion) : promotion;
-        console.log(promotionCreated)
         return await this.repository.save(promotionCreated).then(resp => {
             return resp.id
         }).catch(error => {
@@ -25,11 +24,25 @@ class PromotionRepository implements IPromotionRepository {
 
     async getActivePromotionByProductId(productId: string): Promise<Promotion[]> {
         return await this.repository.find({ where: { product: { id: productId }, status: EPromotionStatus.ACTIVE } }).then(resp => {
-          return resp
+            return resp
         }).catch(error => {
-          const message = `Error on getting ${productId} promotion in database`
-          logger.error(`${message}: ${error.message}`)
-          throw new Error(message)
+            const message = `Error on getting product id: ${productId} from promotion in database`
+            logger.error(`${message}: ${error.message}`)
+            throw new Error(message)
+        });
+    }
+
+    async getPromotionById(id: string): Promise<Promotion> {
+        return await this.repository.findOne({
+            where: {
+                id,
+            },
+        }).then(resp => {
+            return resp
+        }).catch(error => {
+            const message = `Error on getting ${id} promotion in database`
+            logger.error(`${message}: ${error.message}`)
+            throw new Error(message)
         });
     }
 }

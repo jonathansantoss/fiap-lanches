@@ -55,8 +55,7 @@ class Promotion implements IPromotion {
     @Column({
         name: "promotion_value",
         type: "decimal",
-        nullable: false,
-        unique: true,
+        nullable: false
     })
     promotionValue: number;
 }

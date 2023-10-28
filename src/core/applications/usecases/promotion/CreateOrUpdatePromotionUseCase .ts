@@ -20,7 +20,7 @@ class CreateOrUpdatePromotionUseCase implements ICreateOrUpdatePromotionUseCase 
 
     async execute(promotion): Promise<string> {
         const promotions = await this.getActivePromotionsByProductIdUseCase.execute(promotion.productId).then(resp => resp);
-        if (promotions.length > 0) {
+        if (promotions.length > 0 && !promotion.id) {
             throw new CustomError("Product with promotion active", 409)
         }
 
@@ -31,6 +31,11 @@ class CreateOrUpdatePromotionUseCase implements ICreateOrUpdatePromotionUseCase 
         }
 
         product.promotionValue = promotion.promotionValue
+
+        if(promotion.status != EPromotionStatus.ACTIVE) {
+            product.promotionValue = null
+        }
+        
         product.updatedAt = new Date()
 
         const newPromotion: IPromotion = {
@@ -38,9 +43,9 @@ class CreateOrUpdatePromotionUseCase implements ICreateOrUpdatePromotionUseCase 
             product: product,
             startAt: promotion.startAt,
             endAt: promotion.endAt,
-            createdAt: new Date(),
-            updatedAt: null,
-            status: EPromotionStatus.ACTIVE,
+            createdAt: promotion.id ? promotion.createdAt : new Date(),
+            updatedAt:  promotion.id ? new Date() : null,
+            status: promotion.id ? promotion.status : EPromotionStatus.ACTIVE,
             promotionValue: promotion.promotionValue
         }
 

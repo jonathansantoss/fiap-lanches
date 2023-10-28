@@ -1,8 +1,8 @@
 
 import { injectable, inject } from "tsyringe";
 import { IPromotionRepository } from "../../ports/out/promotion/IPromotion.repository";
-import { Promotion } from "../../../../adapter/data/Promotion.model";
 import { IGetActivePromotionsByProductIdUseCase } from "../../ports/in/promotion/IGetActivePromotionsByProductIdUseCase";
+import { IPromotion } from "../../../domain/entities/IPromotion";
 
 @injectable()
 class GetActivePromotionsByProductIdUseCase implements IGetActivePromotionsByProductIdUseCase {
@@ -10,7 +10,7 @@ class GetActivePromotionsByProductIdUseCase implements IGetActivePromotionsByPro
         @inject("PromotionRepository") private promotionRepository: IPromotionRepository
     ) { }
 
-    execute(product: string): Promise<Promotion[]> {
+    execute(product: string): Promise<IPromotion[]> {
         return this.promotionRepository.getActivePromotionByProductId(product);
     }
 
