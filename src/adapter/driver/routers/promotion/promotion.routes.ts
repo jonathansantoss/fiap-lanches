@@ -60,7 +60,7 @@ promotionRouter.post(
 /**
  * @swagger
  * /api/v1/promotion/{id}:
- *   post:
+ *   get:
  *     summary: Recover promotion
  *     tags:
  *       - Promotions
@@ -90,8 +90,8 @@ promotionRouter.get(
 /**
  * @swagger
  * /api/v1/promotion/{id}:
- *   post:
- *     summary: Recover promotion
+ *   delete:
+ *     summary: Cancel promotion
  *     tags:
  *       - Promotions
  *     description: Cancel promotion by id.

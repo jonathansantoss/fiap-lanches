@@ -1,10 +1,11 @@
 
 import { Router } from "express";
-import { validateBody, validateQuery } from "../../midleware/validator/validate";
+import { validateBody, validateParams, validateQuery } from "../../midleware/validator/validate";
 import { GetProductByCategorySchema, ProductIdSchema, SaveProductSchema, UpdateProductSchema } from "../../schemas/ProductSchemas";
 import { GetProductByCategoryController } from "../../controllers/product/GetProductByCategory.controller";
 import { DeleteProductController } from "../../controllers/product/DeleteProduct.controller";
 import { CreateOrUpdateProductController } from "../../controllers/product/CreateOrUpdateProduct.controller";
+import { GetProductByIdController } from "../../controllers/product/GetProductById.controller";
 
 const productRouter = Router();
 
@@ -156,4 +157,34 @@ productRouter.delete(
     validateQuery(ProductIdSchema),
     new DeleteProductController().handler
 );
+
+/**
+ * @swagger
+ * /api/v1/product/{id}:
+ *   get:
+ *     summary: Recover promotion
+ *     tags:
+ *       - Products
+ *     description: Get product by id.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description:  Product's id is going to be recovered.
+ *     responses:
+ *       '200':
+ *         description: Product found
+ *       '400':
+ *         description: Bad payload given to API
+ *       '500':
+ *         description: Internal server error
+ */
+productRouter.get(
+    "/:id",
+    validateParams(ProductIdSchema),
+    new GetProductByIdController().handler
+  );
+
 export { productRouter };
