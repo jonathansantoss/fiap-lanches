@@ -8,8 +8,7 @@ import { Product } from "./Product.model";
 class Promotion implements IPromotion {
     @PrimaryColumn({
         name: "id",
-        type: "uuid",
-        default: () => "uuid_generate_v4()"
+        type: "uuid"
     })
     id?: string;
 

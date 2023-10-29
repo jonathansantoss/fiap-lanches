@@ -6,7 +6,7 @@ import { AppDataSource } from "../../../../config/DataSource";
 import { Order } from "../../../data/Order.model";
 import { logger } from "../../../../config/WinstonLog";
 import { EOrderStatus } from "../../../../core/domain/enums/EOrderStatus";
-import { redis } from "../../../../config/RedisConfig";
+// import { redis } from "../../../../config/RedisConfig";
 
 class OrderRepository implements IOrderRepository {
 
@@ -29,10 +29,10 @@ class OrderRepository implements IOrderRepository {
 
   async getById(id: string): Promise<IOrder> {
 
-    const orderRedis = await redis.get("orderId:" + id);
-    if (orderRedis !== null) {
-      return Promise.resolve(JSON.parse(orderRedis)) as Promise<IOrder>;
-    }
+    // const orderRedis = await redis.get("orderId:" + id);
+    // if (orderRedis !== null) {
+    //   return Promise.resolve(JSON.parse(orderRedis)) as Promise<IOrder>;
+    // }
 
     return await this.repository
       .findOne({
@@ -44,8 +44,8 @@ class OrderRepository implements IOrderRepository {
         if (!resp?.id) {
           return resp;
         }
-        await redis.set("orderId:" + resp.id, JSON.stringify(resp));
-        await redis.expire("orderId:" + resp.id, 1000);
+        // await redis.set("orderId:" + resp.id, JSON.stringify(resp));
+        // await redis.expire("orderId:" + resp.id, 1000);
         return resp;
       })
       .catch((error) => {
@@ -56,11 +56,11 @@ class OrderRepository implements IOrderRepository {
   }
 
   async getByStatus(status: EOrderStatus): Promise<IOrder[]> {
-    const orderRedis = await redis.get("orderStatus:" + status);
+    // const orderRedis = await redis.get("orderStatus:" + status);
 
-    if (orderRedis) {
-      return Promise.resolve(JSON.parse(orderRedis)) as Promise<IOrder[]>;
-    }
+    // if (orderRedis) {
+    //   return Promise.resolve(JSON.parse(orderRedis)) as Promise<IOrder[]>;
+    // }
 
     return await this.repository
       .find({
@@ -69,11 +69,8 @@ class OrderRepository implements IOrderRepository {
         },
       })
       .then(async (resp) => {
-        if (!resp) {
-          return resp;
-        }
-        await redis.set("orderStatus:" + status, JSON.stringify(resp));
-        await redis.expire("orderStatus:" + status, 1000);
+        // await redis.set("orderStatus:" + status, JSON.stringify(resp));
+        // await redis.expire("orderStatus:" + status, 1000);
         return resp;
       })
       .catch((error) => {

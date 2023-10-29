@@ -25,28 +25,6 @@ services:
     networks:
       - fiap_network
 
-  app2:
-    build:
-      context: .
-    ports:
-      - "3001:3000"
-    depends_on:
-      - db
-    command: npm start
-    networks:
-      - fiap_network
-
-  app3:
-    build:
-      context: .
-    ports:
-      - "3002:3000"
-    depends_on:
-      - db
-    command: npm start
-    networks:
-      - fiap_network
-
 volumes:
   postgres_data:
 
