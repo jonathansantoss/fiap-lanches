@@ -14,7 +14,6 @@ export const deleteEmployeeSchema = z
 
 export const updateEmployeeSchema = z
   .object({
-    id: z.string(),
     cpf: z.string().length(11),
     name: z.string().max(200),
     email: z.string().email(),
