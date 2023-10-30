@@ -11,7 +11,7 @@ import {
   createEmployeeSchema,
   deleteEmployeeSchema,
   updateEmployeeSchema,
-} from "../../schemas/EmpoyeeSchemas";
+} from "../../schemas/EmployeeSchemas";
 
 const employeeRouter = Router();
 const createEmployeeController = new CreateEmployeeController();
