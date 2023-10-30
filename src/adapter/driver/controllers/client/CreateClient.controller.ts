@@ -5,18 +5,16 @@ import { ICreateClientUseCase } from "../../../../core/applications/ports/in/cli
 import { logger } from '../../../../config/WinstonLog';
 
 class CreateClientController {
-  handler(request: Request, response: Response) {
+  async handler(request: Request, response: Response) {
     const createClientUseCase: ICreateClientUseCase =
       container.resolve<ICreateClientUseCase>(CreateClientUseCase);
 
-    createClientUseCase.execute(request.body).then(resp => {
+    await createClientUseCase.execute(request.body).then(resp => {
       response.status(200).send({"message": "Client was created"})
     }).catch(error => {
       logger.error(`Post/Put product: ${error.message}`)
       response.status(error.status ? error.status : 500).send({ "error": error.message })
     });
-
-    response.status(200).send("Client saved with success");
   }
 }
 

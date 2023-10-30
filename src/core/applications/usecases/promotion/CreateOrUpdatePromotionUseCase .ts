@@ -6,6 +6,7 @@ import { IPromotionRepository } from "../../ports/out/promotion/IPromotion.repos
 import { IGetActivePromotionsByProductIdUseCase } from "../../ports/in/promotion/IGetActivePromotionsByProductIdUseCase";
 import { CustomError } from "../../../domain/exceptions/Exceptions";
 import { IGetProductByIdUseCase } from "../../ports/in/product/IGetProductByIdUseCase";
+import { ICreateOrUpdateProductUseCase } from "../../ports/in/product/ICreateOrUpdateProductUseCase";
 const { v4: uuidv4 } = require('uuid');
 
 @injectable()
@@ -13,6 +14,7 @@ class CreateOrUpdatePromotionUseCase implements ICreateOrUpdatePromotionUseCase 
     constructor(
         @inject("PromotionRepository") private promotionRepository: IPromotionRepository,
         @inject("GetActivePromotionsByProductIdUseCase") private getActivePromotionsByProductIdUseCase: IGetActivePromotionsByProductIdUseCase,
+        @inject("CreateOrUpdateProductUseCase") private createOrUpdateProductUseCase: ICreateOrUpdateProductUseCase,
         @inject("GetProductByIdUseCase") private getProductById: IGetProductByIdUseCase
     ) { 
     }
@@ -32,7 +34,8 @@ class CreateOrUpdatePromotionUseCase implements ICreateOrUpdatePromotionUseCase 
 
         product.promotionValue = promotion.promotionValue
 
-        if(promotion.status != EPromotionStatus.ACTIVE) {
+        console.log(promotion)
+        if(promotion.status && promotion.status == EPromotionStatus.CANCELLED) {
             product.promotionValue = null
         }
         
@@ -49,6 +52,8 @@ class CreateOrUpdatePromotionUseCase implements ICreateOrUpdatePromotionUseCase 
             promotionValue: promotion.promotionValue
         }
 
+        console.log(product)
+        await this.createOrUpdateProductUseCase.execute(product)
         return this.promotionRepository.saveOrUpdate(newPromotion);
     }
 }

@@ -27,8 +27,7 @@ class Client implements IClient {
   @Column({
     name: "email",
     type: "varchar",
-    nullable: true,
-    unique: true,
+    nullable: true
   })
   email?: string;
   @OneToMany(() => Order, (order) => order.client)

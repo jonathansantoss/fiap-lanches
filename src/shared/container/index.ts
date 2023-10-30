@@ -25,6 +25,8 @@ import { ICancelPromotionUseCase } from "../../core/applications/ports/in/promot
 import { CancelPromotionUseCase } from "../../core/applications/usecases/promotion/CancelPromotionUseCase";
 import { ICreateOrUpdatePromotionUseCase } from "../../core/applications/ports/in/promotion/ICreateOrUpdatePromotionUseCase";
 import { CreateOrUpdatePromotionUseCase } from "../../core/applications/usecases/promotion/CreateOrUpdatePromotionUseCase ";
+import { ICreateOrUpdateProductUseCase } from "../../core/applications/ports/in/product/ICreateOrUpdateProductUseCase";
+import { CreateOrUpdateProductUseCase } from "../../core/applications/usecases/product/CreateOrUpdateProductUseCase";
 
 container.registerSingleton<IProductRepository>(
   "ProductRepository",
@@ -96,5 +98,9 @@ container.registerSingleton<ICreateOrUpdatePromotionUseCase>(
   CreateOrUpdatePromotionUseCase
 );
 
+container.registerSingleton<ICreateOrUpdateProductUseCase>(
+  "CreateOrUpdateProductUseCase",
+  CreateOrUpdateProductUseCase
+);
 
 export { container };
