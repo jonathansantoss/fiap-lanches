@@ -28,7 +28,6 @@
 ## 📖 Table of Contents
 - [📖 Table of Contents](#-table-of-contents)
 - [📂 Repository Structure](#-repository-structure)
-  - [🔧 Installation](#-installation)
   - [🤖 Running fiap-lanches](#-running-fiap-lanches)
   - [🧪 Tests](#-tests)
 
@@ -67,11 +66,7 @@
 
 ```
 
----
-
-
-### 🔧 Installation
-
+### 🤖 Running fiap-lanches
 1. Clone the fiap-lanches repository:
 ```sh
 git clone https://gitlab.com/jonathan.gomess1/fiap-lanches
@@ -82,8 +77,7 @@ git clone https://gitlab.com/jonathan.gomess1/fiap-lanches
 cd fiap-lanches
 ```
 
-### 🤖 Running fiap-lanches
-
+3. Run with docker:
 ```sh
 docker compose up .
 ```
