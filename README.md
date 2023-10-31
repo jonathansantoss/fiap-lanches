@@ -17,10 +17,10 @@
 <img src="https://img.shields.io/badge/Express-000000.svg?style=flat-square&logo=Express&logoColor=white" alt="Express" />
 <img src="https://img.shields.io/badge/JSON-000000.svg?style=flat-square&logo=JSON&logoColor=white" alt="JSON" />
 </p>
-<img src="https://img.shields.io/github/license/jonathan.gomess1/fiap-lanches?style=flat-square&color=5D6D7E" alt="GitHub license" />
-<img src="https://img.shields.io/github/last-commit/jonathan.gomess1/fiap-lanches?style=flat-square&color=5D6D7E" alt="git-last-commit" />
-<img src="https://img.shields.io/github/commit-activity/m/jonathan.gomess1/fiap-lanches?style=flat-square&color=5D6D7E" alt="GitHub commit activity" />
-<img src="https://img.shields.io/github/languages/top/jonathan.gomess1/fiap-lanches?style=flat-square&color=5D6D7E" alt="GitHub top language" />
+<img src="https://img.shields.io/github/license/Marques0x01/fiap-lanches?style=flat-square&color=5D6D7E" alt="GitHub license" />
+<img src="https://img.shields.io/github/last-commit/Marques0x01/fiap-lanches?style=flat-square&color=5D6D7E" alt="git-last-commit" />
+<img src="https://img.shields.io/github/commit-activity/m/Marques0x01/fiap-lanches?style=flat-square&color=5D6D7E" alt="GitHub commit activity" />
+<img src="https://img.shields.io/github/languages/top/Marques0x01/fiap-lanches?style=flat-square&color=5D6D7E" alt="GitHub top language" />
 </div>
 
 ---
