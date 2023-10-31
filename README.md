@@ -79,7 +79,7 @@ cd fiap-lanches
 
 3. Run with docker:
 ```sh
-docker compose up .
+docker compose up
 ```
 
 ### 🧪 Tests
