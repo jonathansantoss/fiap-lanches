@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fiap-lanches
+  labels:
+    app: fiap-lanches
+spec:
+  containers:
+    - name: fiap-lanches-app
+      image: fiaplanches165/fiap-lanches-app:latest
+      ports:
+        - containerPort: 3000
