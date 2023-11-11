@@ -6,14 +6,15 @@ import { Order } from "../adapter/data/Order.model";
 import { Client } from "../adapter/data/Client.model";
 import { Employee } from "../adapter/data/Employee";
 import { Promotion } from "../adapter/data/Promotion.model";
+require('dotenv').config();
 
 export const AppDataSource = new DataSource({
   type: "postgres",
-  host: "db",
-  port: 5432,
-  username: "postgres",
-  password: "mysecretpassword",
-  database: "postgres",
+  host: process.env.POSTGRES_HOST,
+  port: 80,
+  username: process.env.POSTGRES_USER,
+  password: process.env.POSTGRES_PASSWORD,
+  database: process.env.POSTGRES_DB,
   synchronize: true,
   logging: true,
   entities: [Promotion, Product, Order, Client, Employee],
