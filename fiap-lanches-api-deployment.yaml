@@ -13,28 +13,41 @@ spec:
         app: fiap-lanches-api-pod
     spec:
       containers:
-      - name: fiap-lanches-app
-        image: fiaplanches165/fiap-lanches-app:1.0.13
-        env:
-          - name: POSTGRES_HOST
-            valueFrom:
-              secretKeyRef:
-                name: postgres-secret
-                key: POSTGRES_HOST
-          - name: POSTGRES_USER
-            valueFrom:
-              secretKeyRef:
-                name: postgres-secret
-                key: POSTGRES_USER
-          - name: POSTGRES_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: postgres-secret
-                key: POSTGRES_PASSWORD
-          - name: POSTGRES_DB
-            valueFrom:
-              secretKeyRef:
-                name: postgres-secret
-                key: POSTGRES_DB
-        ports:
-        - containerPort: 3000
+        - name: fiap-lanches-app
+          image: fiaplanches165/fiap-lanches-app:1.0.14
+          env:
+            - name: POSTGRES_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_HOST
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_DB
+          livenessProbe:
+            httpGet:
+              path: /api/v1/health-check/
+              port: 3000
+            initialDelaySeconds: 20
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 40
+            failureThreshold: 3
+            periodSeconds: 20
+          ports:
+            - containerPort: 3000

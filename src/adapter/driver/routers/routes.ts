@@ -6,6 +6,7 @@ import { productRouter } from "./product/product.routes";
 import { employeeRouter } from "./employee/employee.routes";
 import { paymentRouter } from "./payment/payment.routes";
 import { promotionRouter } from "./promotion/promotion.routes";
+import { healthRouter } from "./health/health.routes";
 
 /**
  * @swagger
@@ -31,5 +32,6 @@ router.use("/api/v1/product", productRouter);
 router.use("/api/v1/employees", employeeRouter);
 router.use("/api/v1/payments", paymentRouter);
 router.use("/api/v1/promotions", promotionRouter);
+router.use("/api/v1/health-check", healthRouter);
 
 export { router };
