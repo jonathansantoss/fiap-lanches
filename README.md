@@ -28,8 +28,9 @@
 ## 📖 Table of Contents
 - [📖 Table of Contents](#-table-of-contents)
 - [📂 Repository Structure](#-repository-structure)
-  - [🤖 Running fiap-lanches](#-running-fiap-lanches)
+  - [🤖 Running fiap-lanches - Docker](#-running-fiap-lanches---docker)
   - [🧪 Tests](#-tests)
+  - [🤖 Running fiap-lanches - Kubernetes](#-running-fiap-lanches---kubernetes)
 
 ---
 
@@ -66,7 +67,7 @@
 
 ```
 
-### 🤖 Running fiap-lanches
+### 🤖 Running fiap-lanches - Docker
 1. Clone the fiap-lanches repository:
 ```sh
 git clone https://gitlab.com/jonathan.gomess1/fiap-lanches
@@ -85,6 +86,54 @@ docker compose up
 ### 🧪 Tests
 ```sh
 npm test
+```
+
+---
+
+### 🤖 Running fiap-lanches - Kubernetes
+1. Clone the fiap-lanches repository:
+```sh
+git clone https://gitlab.com/jonathan.gomess1/fiap-lanches
+```
+
+2. Change to the project directory:
+```sh
+cd fiap-lanches
+```
+
+3. subir as metricas:
+```sh
+kubectl apply -f metrics.yaml
+```
+
+4. Subir secrets do postgres:
+```sh
+kubectl apply -f postgres-secret.yaml
+```
+
+5. Subir service do postgres:
+```sh
+kubectl apply -f svc-postgress.yaml
+```
+
+6. Subir deployment do postgres:
+```sh
+kubectl apply -f postgres-deployment.yaml
+```
+
+7. Subir service do fiap lanches:
+```sh
+kubectl apply -f svc-lanches-api.yaml
+```
+
+8. Subir deployment do fiap lanches:
+```sh
+kubectl apply -f fiap-lanches-api-deployment.yaml
+```
+
+9. Subir hpa do fiap lanches:
+```sh
+kubectl apply -f hpa.yaml
 ```
 
 ---
