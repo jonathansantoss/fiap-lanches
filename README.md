@@ -31,6 +31,8 @@
   - [🤖 Running fiap-lanches - Docker](#-running-fiap-lanches---docker)
   - [🧪 Tests](#-tests)
   - [🤖 Running fiap-lanches - Kubernetes](#-running-fiap-lanches---kubernetes)
+  - [🤖 Running fiap-lanches - helm Local](#-running-fiap-lanches---helm-local)
+  - [🤖 Running fiap-lanches - helm repository](#-running-fiap-lanches---helm-repository)
 
 ---
 
@@ -134,6 +136,82 @@ kubectl apply -f fiap-lanches-api-deployment.yaml
 9. Subir hpa do fiap lanches:
 ```sh
 kubectl apply -f hpa.yaml
+```
+
+---
+
+### 🤖 Running fiap-lanches - helm Local
+1. Add repository metrics-server:
+```sh
+helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
+```
+
+2. Install chart metrics-server:
+```sh
+helm install my-metrics-server metrics-server/metrics-server --version 3.11.0
+```
+
+3. Acessar a pasta helm/postgres-helm/:
+```sh
+cd helm/postgres-helm/
+```
+
+4. Gerar o pacote com helm:
+```sh
+helm package postgres-fiap-lanches   
+```
+
+5. Fazer instalação do postgres-fiap-lanches:
+```sh
+helm install postgres-fiap-lanches ./docs/postgres-fiap-lanches-0.1.0.tgz  
+```
+
+6. Acessar a posta helm/fiap-lanches-helm/:
+```sh
+cd helm/fiap-lanches-helm/
+```
+
+7. Gerar o pacote com helm:
+```sh
+helm package fiap-lanches   
+```
+
+8. Fazer instalação do fiap-lanches:
+```sh
+helm install fiap-lanches ./docs/fiap-lanches-0.1.0.tgz  
+```
+
+---
+
+### 🤖 Running fiap-lanches - helm repository
+1. Add repository metrics-server:
+```sh
+helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
+```
+
+2. Install chart metrics-server:
+```sh
+helm install my-metrics-server metrics-server/metrics-server --version 3.11.0
+```
+
+3. Add repository postgres-fiap-lanches:
+```sh
+helm repo add postgres-fiap-lanches https://jonathansantoss.github.io/postgres-fiap-lanches
+```
+
+4. Install chart postgres-fiap-lanches:
+```sh
+helm install svc-postgres postgres-fiap-lanches/svc-postgres --version 0.1.0
+```
+
+5. Add repository fiap-lanches:
+```sh
+helm repo add fiap-lanches https://jonathansantoss.github.io/fiap-lanches-helm
+```
+
+6. Install chart fiap-lanches:
+```sh
+helm install fiap-lanches fiap-lanches/fiap-lanches --version 0.1.0
 ```
 
 ---
