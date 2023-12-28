@@ -10,7 +10,7 @@ const options = {
       description: 'Documentation for Fiap Lanches API',
     },
   },
-  apis: ["./src/adapter/driver/routers/**/*.ts"],
+  apis: ["./src/resources/routers/**/*.ts"],
 };
 
 const swaggerConfig = swaggerJsdoc(options);
