@@ -27,6 +27,9 @@
 
 ## 📖 Table of Contents
 - [📖 Table of Contents](#-table-of-contents)
+- [✨ Objectives](#-objectives)
+- [📜 Architecture](#-architecture)
+- [🌐 Swagger - API Collection](#-swagger---api-collection)
 - [📂 Repository Structure](#-repository-structure)
   - [🤖 Running fiap-lanches - Docker](#-running-fiap-lanches---docker)
   - [🧪 Tests](#-tests)
@@ -49,6 +52,10 @@ To address this issue, this repository has been created with the intention of be
 ## 📜 Architecture
 
 ![Fiap Lanches Architecture](others/architecture/architecture_v1.jpeg)
+
+## 🌐 Swagger - API Collection
+
+[API Collection](others/api_collection/fiapLanchesEndpointCollections.json) or After running application you can access swagger: [Swagger](http://localhost:3000/api-docs/)
 
 ## 📂 Repository Structure
 
@@ -227,10 +234,6 @@ helm repo add fiap-lanches https://jonathansantoss.github.io/fiap-lanches-helm
 ```sh
 helm install fiap-lanches fiap-lanches/fiap-lanches --version 0.1.0
 ```
-
-## 🌐 Swagger / API Collection
-
-[API Collection](others/api_collection/fiapLanchesEndpointCollections.json) or After running application you can access swagger: [Swagger](http://localhost:3000/api-docs/)
 
 ---
 
