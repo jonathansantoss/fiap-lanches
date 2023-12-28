@@ -36,6 +36,20 @@
 
 ---
 
+## ✨ Objectives
+
+FiapLanches was a great success, and with that success came the need for expansion. However, issues were identified with customer service and order management.
+
+Without an order management system, there can be confusion between the attendants and the kitchen, leading to delays in order preparation and delivery. Orders might get lost, misinterpreted, or forgotten, resulting in customer dissatisfaction and potential loss of business.
+
+As a solution, a system for order management is required to ensure that the establishment can efficiently serve customers, managing their orders and stocks appropriately.
+
+To address this issue, this repository has been created with the intention of being a self-service and fast food management system that provides ease for customers to place and receive their orders. It also assists employees in managing these orders while enabling control over marketing strategies and employees management.
+
+## 📜 Architecture
+
+![Fiap Lanches Architecture](others/architecture/architecture_v1.jpeg)
+
 ## 📂 Repository Structure
 
 ```sh
@@ -213,6 +227,10 @@ helm repo add fiap-lanches https://jonathansantoss.github.io/fiap-lanches-helm
 ```sh
 helm install fiap-lanches fiap-lanches/fiap-lanches --version 0.1.0
 ```
+
+## 🌐 Swagger / API Collection
+
+[API Collection](others/api_collection/fiapLanchesEndpointCollections.json) or After running application you can access swagger: [Swagger](http://localhost:3000/api-docs/)
 
 ---
 
