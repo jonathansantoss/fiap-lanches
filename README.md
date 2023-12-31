@@ -131,11 +131,6 @@ kubectl apply -f svc-lanches-api.yaml
 kubectl apply -f fiap-lanches-api-deployment.yaml
 ```
 
-9. Subir hpa do fiap lanches:
-```sh
-kubectl apply -f hpa.yaml
-```
-
 ---
 
 [**Return**](#Top)

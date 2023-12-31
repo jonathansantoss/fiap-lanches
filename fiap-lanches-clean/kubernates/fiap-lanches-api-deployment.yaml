@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fiap-lanches-api-pod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: fiap-lanches-api-pod
+  template:
+    metadata:
+      labels:
+        app: fiap-lanches-api-pod
+    spec:
+      containers:
+        - name: fiap-lanches-app
+          image: fiaplanches165/fiaplanches:2.0.3
+          env:
+            - name: POSTGRES_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_HOST
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_DB
+          livenessProbe:
+            httpGet:
+              path: /api/v1/health-check/
+              port: 3000
+            initialDelaySeconds: 20
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /api/v1/health-check/
+              port: 3000
+            initialDelaySeconds: 40
+            failureThreshold: 3
+            periodSeconds: 20
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              cpu: 10m
