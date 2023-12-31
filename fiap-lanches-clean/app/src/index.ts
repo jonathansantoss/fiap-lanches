@@ -1,5 +1,6 @@
 import bodyParser from "body-parser";
 import express from "express";
+import './configurations/DataSource';
 import swaggerUi from  'swagger-ui-express';
 import "express-async-errors";
 import { logger } from "./configurations/WinstonLog";
