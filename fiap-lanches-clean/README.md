@@ -118,17 +118,27 @@ kubectl apply -f postgres-secret.yaml
 kubectl apply -f svc-postgress.yaml
 ```
 
-6. Subir deployment do postgres:
+6. Subir service do postgres:
+```sh
+kubectl apply -f postgres-pv.yaml   
+```
+
+7. Subir service do postgres:
+```sh
+kubectl apply -f postgres-pvc.yaml  
+```
+
+8. Subir deployment do postgres:
 ```sh
 kubectl apply -f postgres-deployment.yaml
 ```
 
-7. Subir service do fiap lanches:
+9. Subir service do fiap lanches:
 ```sh
 kubectl apply -f svc-lanches-api.yaml
 ```
 
-8. Subir deployment do fiap lanches:
+10. Subir deployment do fiap lanches:
 ```sh
 kubectl apply -f fiap-lanches-api-deployment.yaml
 ```
