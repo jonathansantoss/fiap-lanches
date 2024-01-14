@@ -28,8 +28,7 @@
 ## 📖 Table of Contents
 - [📖 Table of Contents](#-table-of-contents)
 - [📂 Repository Structure](#-repository-structure)
-  - [🤖 Running tests fiap-lanches](#-running-tests-fiap-lanches)
-  - [🧪 Tests](#-tests)
+  - [� Tests](#-tests)
   - [🤖 Running fiap-lanches - Kubernetes](#-running-fiap-lanches---kubernetes)
 
 ---
@@ -106,7 +105,7 @@
 
 ```
 
-### 🤖 Running tests fiap-lanches
+### 🧪 Tests
 1. Clone the fiap-lanches repository:
 ```sh
 git clone git@github.com:Marques0x01/fiap-lanches.git
@@ -117,7 +116,7 @@ git clone git@github.com:Marques0x01/fiap-lanches.git
 cd fiap-lanches/fiap-lanches-clean
 ```
 
-### 🧪 Tests
+3. Rodar os testes:
 ```sh
 npm test
 ```
