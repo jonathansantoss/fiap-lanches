@@ -28,7 +28,7 @@
 ## 📖 Table of Contents
 - [📖 Table of Contents](#-table-of-contents)
 - [📂 Repository Structure](#-repository-structure)
-  - [🤖 Running fiap-lanches - Docker](#-running-fiap-lanches---docker)
+  - [🤖 Running tests fiap-lanches](#-running-tests-fiap-lanches)
   - [🧪 Tests](#-tests)
   - [🤖 Running fiap-lanches - Kubernetes](#-running-fiap-lanches---kubernetes)
 
@@ -36,8 +36,38 @@
 
 ## 📂 Repository Structure
 
+
 ```sh
-└── fiap-lanches/
+└── fiap-lanches/fiap-lanches-clean/
+    ├── app/
+    │    ├── src/
+    │    │   ├── configurations/
+    │    │   ├── domain/
+    │    │   ├── repositories/
+    │    │   ├── resources/
+    │    │   ├── services/
+    │    │   ├── tests/
+    │    │   └── index.ts
+    │    ├── jest.config.js
+    │    ├── package-lock.json
+    │    ├── package.json
+    │    └── tsconfig.json
+    └── kubernates/
+    │   ├── fiap-lanches-api-deployment.yaml
+    │   ├── hpa.yaml
+    │   ├── metrics.yaml
+    │   ├── postgres-deployment.yaml
+    │   ├── postgres-pv.yaml
+    │   ├── postgres-pvc.yaml
+    │   ├── postgres-secret.yaml
+    │   ├── svc-lanches-api.yaml
+    │   └── svc-postgress.yaml
+
+
+```
+
+```sh
+└── fiap-lanches/fiap-lanches-hexagonal/
     ├── Dockerfile
     ├── docker-compose.yml
     ├── jest.config.js
@@ -63,24 +93,28 @@
     │       ├── order/
     │       ├── payment/
     │       └── product/
+    │   fiap-lanches-api-deployment.yaml
+    │   hpa.yaml
+    │   metrics.yaml
+    │   postgres-deployment.yaml
+    │   postgres-pv.yaml
+    │   postgres-pvc.yaml
+    │   postgres-secret.yaml
+    │   svc-lanches-api.yaml
+    │   svc-postgress.yaml
     └── tsconfig.json
 
 ```
 
-### 🤖 Running fiap-lanches - Docker
+### 🤖 Running tests fiap-lanches
 1. Clone the fiap-lanches repository:
 ```sh
-git clone https://gitlab.com/jonathan.gomess1/fiap-lanches
+git clone git@github.com:Marques0x01/fiap-lanches.git
 ```
 
 2. Change to the project directory:
 ```sh
-cd fiap-lanches
-```
-
-3. Run with docker:
-```sh
-docker compose up
+cd fiap-lanches/fiap-lanches-clean
 ```
 
 ### 🧪 Tests
@@ -99,6 +133,8 @@ git clone https://gitlab.com/jonathan.gomess1/fiap-lanches
 2. Change to the project directory:
 ```sh
 cd fiap-lanches
+cd fiap-lanches-clean
+cd kubernetes
 ```
 
 3. subir as metricas:
@@ -116,17 +152,27 @@ kubectl apply -f postgres-secret.yaml
 kubectl apply -f svc-postgress.yaml
 ```
 
-6. Subir deployment do postgres:
+6. Subir service do postgres:
+```sh
+kubectl apply -f postgres-pv.yaml   
+```
+
+7. Subir service do postgres:
+```sh
+kubectl apply -f postgres-pvc.yaml  
+```
+
+8. Subir deployment do postgres:
 ```sh
 kubectl apply -f postgres-deployment.yaml
 ```
 
-7. Subir service do fiap lanches:
+9. Subir service do fiap lanches:
 ```sh
 kubectl apply -f svc-lanches-api.yaml
 ```
 
-8. Subir deployment do fiap lanches:
+10. Subir deployment do fiap lanches:
 ```sh
 kubectl apply -f fiap-lanches-api-deployment.yaml
 ```

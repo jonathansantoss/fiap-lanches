@@ -1,0 +1,11 @@
+FROM node:18
+ENV POSTGRES_DB=""
+ENV POSTGRES_PASSWORD=""
+ENV POSTGRES_USER=""
+ENV POSTGRES_HOST=""
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 3000
+CMD ["npm", "start"]
