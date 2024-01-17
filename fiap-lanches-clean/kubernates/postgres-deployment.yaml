@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: postgres-pod
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: postgres-pod
@@ -12,9 +12,16 @@ spec:
       labels:
         app: postgres-pod
     spec:
+      volumes:
+        - name: postgres-storage
+          persistentVolumeClaim:
+            claimName: postgres-pvc
       containers:
       - name: db
         image: postgres:latest
+        volumeMounts:
+          - mountPath: /var/lib/postgresql/data
+            name: postgres-storage
         env:
           - name: POSTGRES_USER
             valueFrom:
