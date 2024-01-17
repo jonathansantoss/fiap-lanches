@@ -28,7 +28,7 @@
 ## 📖 Table of Contents
 - [📖 Table of Contents](#-table-of-contents)
 - [📂 Repository Structure](#-repository-structure)
-  - [� Tests](#-tests)
+  - [🧪 Tests](#-tests)
   - [🤖 Running fiap-lanches - Kubernetes](#-running-fiap-lanches---kubernetes)
 
 ---
@@ -41,9 +41,46 @@
     ├── app/
     │    ├── src/
     │    │   ├── configurations/
+    │    │   │   ├── DataSource.ts
+    │    │   │   ├── InjectionDependency.ts
+    │    │   │   ├── Swagger.ts
+    │    │   │   ├── WinstonLog.ts
     │    │   ├── domain/
+    │    │   │   ├── enums/
+    │    │   │   │   ├── EOrderStatus.ts
+    │    │   │   │   ├── EPayment.ts
+    │    │   │   │   ├── EProductCategory
+    │    │   │   │   ├── EPromotionStatus
+    │    │   │   ├── models/
+    │    │   │   │   ├── IClientModel.ts
+    │    │   │   │   ├── IEmployeeModel.ts
+    │    │   │   │   ├── IOrderModel.ts
+    │    │   │   │   ├── IProductModel.ts
+    │    │   │   │   ├── IPromotionModel.ts
     │    │   ├── repositories/
+    │    │   │   ├── entity/
+    │    │   │   │   ├── ClientEntity.ts
+    │    │   │   │   ├── EmployeeEntity.ts
+    │    │   │   │   ├── OrderEntity.ts
+    │    │   │   │   ├── ProductEntity.ts
+    │    │   │   │   ├── PromotionEntity.ts
+    │    │   │   ├── impl/
+    │    │   │   │   ├── ClientRepository.ts
+    │    │   │   │   ├── EmployeeRepository.ts
+    │    │   │   │   ├── OrderRepository.ts
+    │    │   │   │   ├── ProductRepository.ts
+    │    │   │   │   ├── PromotionRepository.ts
+    │    │   │   ├── interfaces/
+    │    │   │   │   ├──IClientRepository.ts
+    │    │   │   │   ├──IEmployeeRepository.ts
+    │    │   │   │   ├──IOrderRepository.ts
+    │    │   │   │   ├──IProductRepository.ts
+    │    │   │   │   ├──IPromotionRepository.ts
     │    │   ├── resources/
+    │    │   │   ├── controllers/
+    │    │   │   ├── midleware/
+    │    │   │   ├── routers/
+    │    │   │   ├── schemas/
     │    │   ├── services/
     │    │   ├── tests/
     │    │   └── index.ts
