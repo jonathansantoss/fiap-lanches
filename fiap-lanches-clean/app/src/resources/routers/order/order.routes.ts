@@ -4,6 +4,7 @@ import { validateBody, validateQuery } from "../../midleware/validator/validate"
 import { GetByStatusSchema, SaveOrderSchema, UpdateStatusSchema } from "../../schemas/OrderSchemas";
 import { UpdateOrderStatusController } from "../../controllers/order/UpdateOrderStatusController";
 import { GetOrderByStatusController } from "../../controllers/order/GetOrderByStatusController";
+import { GetAllUnfinishedOrdersController } from "../../controllers/order/GetAllUnfinishedOrdersController";
 
 const orderRouter = Router();
 
@@ -112,5 +113,22 @@ orderRouter.put("/",
 orderRouter.get("/",
     validateQuery(GetByStatusSchema),
     new GetOrderByStatusController().handler);
+
+/**
+* @swagger
+ * /api/v1/order/unfinished:
+ *   get:
+ *     summary: Get all unfinished orders
+ *     tags:
+ *       - Orders
+ *     description: Get all unfinished orders.
+ *     responses:
+ *       '200':
+ *         description: Order list recovered with success.
+ *       '500':
+ *         description: Internal server error
+ */
+orderRouter.get("/unfinished",
+    new GetAllUnfinishedOrdersController().handler);
 
 export { orderRouter };

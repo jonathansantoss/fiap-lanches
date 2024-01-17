@@ -27,6 +27,8 @@ import { ICreateOrUpdatePromotionService } from "../services/interfaces/promotio
 import { CreateOrUpdatePromotionService } from "../services/impl/promotion/CreateOrUpdatePromotionService";
 import { ICreateOrUpdateProductService } from "../services/interfaces/product/ICreateOrUpdateProductService";
 import { CreateOrUpdateProductService } from "../services/impl/product/CreateOrUpdateProductService";
+import { IGetAllUnfinishedOrdersService } from "../services/interfaces/order/IGetAllUnfinishedOrdersService";
+import { GetAllUnfinishedOrdersService } from "../services/impl/order/GetAllUnfinishedOrdersService";
 
 container.registerSingleton<IProductRepository>(
   "ProductRepository",
@@ -102,5 +104,10 @@ container.registerSingleton<ICreateOrUpdateProductService>(
   "CreateOrUpdateProductService",
   CreateOrUpdateProductService
 );
+
+container.registerSingleton<IGetAllUnfinishedOrdersService>(
+  "GetAllUnfinishedOrdersService",
+  GetAllUnfinishedOrdersService
+)
 
 export { container };

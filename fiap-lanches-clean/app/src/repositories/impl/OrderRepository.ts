@@ -4,9 +4,10 @@ import { Order } from "../entity/OrderEntity";
 import { EOrderStatus } from "../../domain/enums/EOrderStatus";
 import { AppDataSource } from "../../configurations/DataSource";
 import { logger } from "../../configurations/WinstonLog";
-import { Repository } from "typeorm";
+import { Repository, Not } from "typeorm";
 
 class OrderRepository implements IOrderRepository {
+
 
   private repository: Repository<Order> = AppDataSource.getRepository(Order);
 
@@ -73,6 +74,28 @@ class OrderRepository implements IOrderRepository {
       })
       .catch((error) => {
         const message = "Error getting order from database";
+        logger.error(`${message}: ${error.message}`);
+        throw new Error(message);
+      });
+  }
+
+  async getAllUnfinishedOrders(): Promise<IOrder[]> {
+    return await this.repository.find(
+      {
+        where:
+        {
+          status: Not(EOrderStatus.FINISHED),
+        },
+        order: {
+          status: 'ASC',
+          startedAt: 'ASC'
+        }
+      })
+      .then(async (resp) => {
+        return resp;
+      })
+      .catch((error) => {
+        const message = "Error getting orders from database";
         logger.error(`${message}: ${error.message}`);
         throw new Error(message);
       });

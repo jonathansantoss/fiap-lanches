@@ -4,6 +4,7 @@ interface IOrderRepository {
   saveOrUpdate(order: IOrder): Promise<string>;
   getById(id: string): Promise<IOrder>;
   getByStatus(status: EOrderStatus): Promise<IOrder[]>
+  getAllUnfinishedOrders(): Promise<IOrder[]>
 }
 
 export { IOrderRepository };

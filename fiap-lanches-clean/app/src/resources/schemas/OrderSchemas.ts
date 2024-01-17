@@ -31,3 +31,7 @@ export const GetByStatusSchema = z
             EOrderStatus.RECEIVED
         ])
     }).required().strict(); 
+
+export const GetAllUnfinishedOrder = z.object({
+    id: z.string()
+})
