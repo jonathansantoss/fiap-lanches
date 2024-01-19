@@ -97,7 +97,7 @@ class OrderRepository implements IOrderRepository {
       .catch((error) => {
         const message = "Error getting orders from database";
         logger.error(`${message}: ${error.message}`);
-        throw new Error(message);
+        throw new Error(`${message}: ${error.message}`);
       });
   }
 }

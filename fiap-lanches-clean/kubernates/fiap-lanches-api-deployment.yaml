@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: fiap-lanches-api-pod
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: fiap-lanches-api-pod
