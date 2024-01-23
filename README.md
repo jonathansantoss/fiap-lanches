@@ -25,39 +25,39 @@
 
 ---
 
-## 📖 Table of Contents
-- [📖 Table of Contents](#-table-of-contents)
-- [✨ Objectives](#-objectives)
-- [📜 Architecture](#-architecture)
-- [🌐 Swagger - API Collection](#-swagger---api-collection)
-- [📂 Repository Structure](#-repository-structure)
-  - [🤖 Running fiap-lanches - Docker](#-running-fiap-lanches---docker)
-  - [🧪 Tests](#-tests)
-  - [🤖 Running fiap-lanches - Kubernetes](#-running-fiap-lanches---kubernetes)
-  - [🤖 Running fiap-lanches - helm Local](#-running-fiap-lanches---helm-local)
-  - [🤖 Running fiap-lanches - helm repository](#-running-fiap-lanches---helm-repository)
+## 📖 Conteudo
+- [📖 Conteudo](#-conteudo)
+- [✨ Objetivos](#-objetivos)
+- [📜 Arquitetura](#-arquitetura)
+- [🌐 Swagger - API Coleção](#-swagger---api-coleção)
+- [📂 Estrutura do Repositório](#-estrutura-do-repositório)
+  - [🤖 Executando fiap-lanches - Docker](#-executando-fiap-lanches---docker)
+  - [🧪 Testes](#-testes)
+  - [🤖 Executando fiap-lanches - Kubernetes](#-executando-fiap-lanches---kubernetes)
+  - [🤖 Executando fiap-lanches - helm Local](#-executando-fiap-lanches---helm-local)
+  - [🤖 Executando fiap-lanches - helm repository](#-running-fiap-lanches---helm-repository)
 
 ---
 
-## ✨ Objectives
+## ✨ Objetivos
 
-FiapLanches was a great success, and with that success came the need for expansion. However, issues were identified with customer service and order management.
+O FiapLanches foi um grande sucesso, e com esse sucesso surgiu a necessidade de expansão. No entanto, foram identificados problemas com o atendimento ao cliente e o gerenciamento de pedidos.
 
-Without an order management system, there can be confusion between the attendants and the kitchen, leading to delays in order preparation and delivery. Orders might get lost, misinterpreted, or forgotten, resulting in customer dissatisfaction and potential loss of business.
+Sem um sistema de gerenciamento de pedidos, pode haver confusão entre os atendentes e a cozinha, resultando em atrasos na preparação e entrega de pedidos. Pedidos podem ser perdidos, interpretados erroneamente ou esquecidos, o que leva à insatisfação do cliente e possíveis perdas de negócios.
 
-As a solution, a system for order management is required to ensure that the establishment can efficiently serve customers, managing their orders and stocks appropriately.
+Como solução, é necessário um sistema de gerenciamento de pedidos para garantir que o estabelecimento possa atender os clientes de forma eficiente, gerenciando seus pedidos e estoques adequadamente.
 
-To address this issue, this repository has been created with the intention of being a self-service and fast food management system that provides ease for customers to place and receive their orders. It also assists employees in managing these orders while enabling control over marketing strategies and employees management.
+Para resolver esse problema, este repositório foi criado com a intenção de ser um sistema de autosserviço e gerenciamento de fast food que oferece facilidade para os clientes fazerem e receberem seus pedidos. Ele também auxilia os funcionários no gerenciamento desses pedidos, permitindo o controle sobre estratégias de marketing e o gerenciamento de funcionários.
 
-## 📜 Architecture
+## 📜 Arquitetura
 
-![Fiap Lanches Architecture](others/architecture/architecture_v1.jpeg)
+![Fiap Lanches Arquitetura](others/architecture/architecture_v1.jpeg)
 
-## 🌐 Swagger - API Collection
+## 🌐 Swagger - API Coleção
 
-[API Collection](others/api_collection/fiapLanchesEndpointCollections.json) or After running application you can access swagger: [Swagger](http://localhost:3000/api-docs/)
+[API Coleção](others/api_collection/fiapLanchesEndpointCollections.json) or ou depois de rodar o projeto acesse o swagger: [Swagger](http://localhost:3000/api-docs/)
 
-## 📂 Repository Structure
+## 📂 Estrutura do repositório
 
 ```sh
 └── fiap-lanches/
@@ -90,41 +90,41 @@ To address this issue, this repository has been created with the intention of be
 
 ```
 
-### 🤖 Running fiap-lanches - Docker
+### 🤖 Executando fiap-lanches - Docker
 1. Clone the fiap-lanches repository:
 ```sh
 git clone https://gitlab.com/jonathan.gomess1/fiap-lanches
 ```
 
-2. Change to the project directory:
+2. Mudar pasta do projeto:
 ```sh
 cd fiap-lanches
 ```
 
-3. Run with docker:
+3. Rodar com docker:
 ```sh
 docker compose up
 ```
 
-### 🧪 Tests
+### 🧪 Testes
 ```sh
 npm test
 ```
 
 ---
 
-### 🤖 Running fiap-lanches - Kubernetes
-1. Clone the fiap-lanches repository:
+### 🤖 Executando fiap-lanches - Kubernetes
+1. Clone o repositório fiap-lanches:
 ```sh
 git clone https://gitlab.com/jonathan.gomess1/fiap-lanches
 ```
 
-2. Change to the project directory:
+2. Mudar pasta do projeto:
 ```sh
 cd fiap-lanches
 ```
 
-3. subir as metricas:
+3. Subir as metricas:
 ```sh
 kubectl apply -f metrics.yaml
 ```
@@ -162,12 +162,12 @@ kubectl apply -f hpa.yaml
 ---
 
 ### 🤖 Running fiap-lanches - helm Local
-1. Add repository metrics-server:
+1. Adicione repository metrics-server:
 ```sh
 helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
 ```
 
-2. Install chart metrics-server:
+2. Instale o chart metrics-server:
 ```sh
 helm install my-metrics-server metrics-server/metrics-server --version 3.11.0
 ```
@@ -204,33 +204,33 @@ helm install fiap-lanches ./docs/fiap-lanches-0.1.0.tgz
 
 ---
 
-### 🤖 Running fiap-lanches - helm repository
-1. Add repository metrics-server:
+### 🤖 Executando fiap-lanches - helm repository
+1. Adicione o repositório metrics-server:
 ```sh
 helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
 ```
 
-2. Install chart metrics-server:
+2. Intale o chart metrics-server:
 ```sh
 helm install my-metrics-server metrics-server/metrics-server --version 3.11.0
 ```
 
-3. Add repository postgres-fiap-lanches:
+3. Adicione o repositório postgres-fiap-lanches:
 ```sh
 helm repo add postgres-fiap-lanches https://jonathansantoss.github.io/postgres-fiap-lanches
 ```
 
-4. Install chart postgres-fiap-lanches:
+4. Instale o chart postgres-fiap-lanches:
 ```sh
 helm install svc-postgres postgres-fiap-lanches/svc-postgres --version 0.1.0
 ```
 
-5. Add repository fiap-lanches:
+5. Adicione o repositório fiap-lanches:
 ```sh
 helm repo add fiap-lanches https://jonathansantoss.github.io/fiap-lanches-helm
 ```
 
-6. Install chart fiap-lanches:
+6. Intale o chart fiap-lanches:
 ```sh
 helm install fiap-lanches fiap-lanches/fiap-lanches --version 0.1.0
 ```
