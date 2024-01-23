@@ -2,7 +2,7 @@
 <h1 align="center">
 <img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/ec559a9f6bfd399b82bb44393651661b08aaf7ba/icons/folder-markdown-open.svg" width="100" />
 <br>FIAP-LANCHES</h1>
-<h3>◦ Developed with the software and tools below.</h3>
+<h3>◦ Desenvolvido com:</h3>
 
 <p align="center">
 <img src="https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=flat-square&logo=JavaScript&logoColor=black" alt="JavaScript" />
@@ -55,7 +55,7 @@ Para resolver esse problema, este repositório foi criado com a intenção de se
 
 ## 🌐 Swagger - API Coleção
 
-[API Coleção](others/api_collection/fiapLanchesEndpointCollections.json) or ou depois de rodar o projeto acesse o swagger: [Swagger](http://localhost:3000/api-docs/)
+[API Coleção](others/api_collection/fiapLanchesEndpointCollections.json) ou depois de rodar o projeto acesse o swagger: [Swagger](http://localhost:3000/api-docs/)
 
 ## 📂 Estrutura do repositório
 
