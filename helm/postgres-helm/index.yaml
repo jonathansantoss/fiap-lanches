@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  svc-postgres:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-11-28T16:36:05.781927789-03:00"
+    description: A Helm chart for Kubernetes
+    digest: 56f8777d4551098b660f915b045def247f89e888ef7445e2daf5514685fa09eb
+    name: svc-postgres
+    type: application
+    urls:
+    - https://jonathansantoss.github.io/postgres-fiap-lanches/docs/svc-postgres-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-11-28T16:36:05.78162647-03:00"
