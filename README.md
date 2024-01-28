@@ -51,7 +51,11 @@ Para resolver esse problema, este repositório foi criado com a intenção de se
 
 ## 📜 Arquitetura
 
-![Fiap Lanches Arquitetura](others/architecture/architecture_v1.jpeg)
+Completa
+![Fiap Lanches Arquitetura](others/architecture/complete_architecture.png)
+
+Simplificada
+![Fiap Lanches Arquitetura](others/architecture/simplified_architecture.png)
 
 ## 🌐 Swagger - API Coleção
 

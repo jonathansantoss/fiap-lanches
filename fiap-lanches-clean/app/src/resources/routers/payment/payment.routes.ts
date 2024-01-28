@@ -1,11 +1,13 @@
 import { Router } from "express";
-import { UpdatePaymentConroller } from "../../controllers/payment/UpdatePaymentController";
-import { validateQuery } from "../../midleware/validator/validate";
-import { createPaymentSchema } from "../../schemas/PaymentSchemas";
+import { UpdatePaymentController } from "../../controllers/payment/UpdatePaymentController";
+import { validateBody, validateQuery } from "../../midleware/validator/validate";
+import { createPaymentSchema, webHookPaymentSchema } from "../../schemas/PaymentSchemas";
+import { WebHookPaymentController } from "../../controllers/payment/WebHookPaymentController";
 
 const paymentRouter = Router();
 
-const updatePaymentConroller = new UpdatePaymentConroller();
+const updatePaymentController = new UpdatePaymentController();
+const webHookPaymentController = new WebHookPaymentController();
 
 /**
 * @swagger
@@ -35,7 +37,77 @@ const updatePaymentConroller = new UpdatePaymentConroller();
 paymentRouter.put(
   "/",
   validateQuery(createPaymentSchema),
-  updatePaymentConroller.handler
+  updatePaymentController.handler
+);
+
+
+/**
+* @swagger
+ * /api/v1/payments/webhook:
+ *   post:
+ *     summary: Receive data from payment services to update order status
+ *     tags:
+ *       - Payments
+ *     description: Update order payment based in payload provided.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               statusCode:
+ *                 type: number
+ *                 description: Status code from payment processed
+ *                 required: true
+ *               message:
+ *                 type: string
+ *                 description: Message returned from payment service.
+ *               payer:
+ *                 type: object
+ *                 properties:
+ *                   name:
+ *                      type: string
+ *                      description: Payer's name
+ *                   document:
+ *                      type: string
+ *                      description: Payer's document
+ *                   email:
+ *                      type: string
+ *                      description: Payer's email
+ *                   bank:
+ *                      type: string
+ *                      description: Bank used in payment
+ *               payment:
+ *                 type: object
+ *                 properties:
+ *                   order:
+ *                      type: string
+ *                      description: Order's ID
+ *                   paidAt:
+ *                      type: string
+ *                      description: Payment datetime
+ *                   value:
+ *                      type: number
+ *                      description: Value to be paid
+ *                   paymentMethod:
+ *                      type: string
+ *                      description: Payment method
+ *     responses:
+ *       '200':
+ *         description: Order updated
+ *       '400':
+ *         description: Bad payload given to API
+ *       '404':
+ *         description: Order not found
+ *       '500':
+ *         description: Internal server error
+ */
+paymentRouter.post(
+  "/webhook",
+  validateBody(webHookPaymentSchema),
+  webHookPaymentController.handler
 );
 
 export { paymentRouter };
+

@@ -5,7 +5,7 @@ import { GetOrderByIdService } from "../../../services/impl/order/GetOrderByIdSe
 import { UpdatePaymentService } from "../../../services/impl/payment/UpdatePaymentService";
 import { container } from "../../../configurations/InjectionDependency";
 
-class UpdatePaymentConroller {
+class UpdatePaymentController {
   async handler(request: Request, response: Response): Promise<Response> {
     const orderId: string = request.query.orderId as string;
 
@@ -27,4 +27,4 @@ class UpdatePaymentConroller {
   }
 }
 
-export { UpdatePaymentConroller };
+export { UpdatePaymentController };
