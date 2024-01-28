@@ -196,7 +196,7 @@ npm test
 ### 🤖 Executando fiap-lanches - Kubernetes
 1. Clone o repositório fiap-lanches:
 ```sh
-git clone https://gitlab.com/jonathan.gomess1/fiap-lanches
+git clone git@github.com:Marques0x01/fiap-lanches.git
 ```
 
 2. Mudar pasta do projeto:
