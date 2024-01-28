@@ -246,6 +246,11 @@ kubectl apply -f svc-lanches-api.yaml
 kubectl apply -f fiap-lanches-api-deployment.yaml
 ```
 
+11. Acesse o swagger:
+```sh
+http://localhost:32000/api-docs/
+```
+
 ---
 
 ### 🤖 Running fiap-lanches - helm Local
