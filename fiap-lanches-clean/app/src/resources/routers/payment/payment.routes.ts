@@ -1,13 +1,15 @@
 import { Router } from "express";
 import { UpdatePaymentController } from "../../controllers/payment/UpdatePaymentController";
 import { validateBody, validateQuery } from "../../midleware/validator/validate";
-import { createPaymentSchema, webHookPaymentSchema } from "../../schemas/PaymentSchemas";
+import { paymentByOrderIdSchema, webHookPaymentSchema } from "../../schemas/PaymentSchemas";
 import { WebHookPaymentController } from "../../controllers/payment/WebHookPaymentController";
+import { GetPaymentStatusByOrderIdController } from "../../controllers/payment/GetPaymentStatusByOrderIdController";
 
 const paymentRouter = Router();
 
 const updatePaymentController = new UpdatePaymentController();
 const webHookPaymentController = new WebHookPaymentController();
+const getPaymentStatusByOrderIdController = new GetPaymentStatusByOrderIdController();
 
 /**
 * @swagger
@@ -36,9 +38,41 @@ const webHookPaymentController = new WebHookPaymentController();
  */
 paymentRouter.put(
   "/",
-  validateQuery(createPaymentSchema),
+  validateQuery(paymentByOrderIdSchema),
   updatePaymentController.handler
 );
+
+/**
+* @swagger
+ * /api/v1/payments:
+ *   get:
+ *     summary: Get payments status by order id
+ *     tags:
+ *       - Payments
+ *     description: Get payments status with order id provided.
+ *     parameters:
+ *       - in: query
+ *         name: orderId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Order id that is going to be recovered
+ *     responses:
+ *       '200':
+ *         description: Payment order status recovered
+ *       '400':
+ *         description: Bad payload given to API
+ *       '404':
+ *         description: Order not found
+ *       '500':
+ *         description: Internal server error
+ */
+paymentRouter.get(
+  "/",
+  validateQuery(paymentByOrderIdSchema),
+  getPaymentStatusByOrderIdController.handler
+);
+
 
 
 /**
