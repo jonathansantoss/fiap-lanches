@@ -33,7 +33,7 @@ class Order implements IOrder {
 
   @Column({
     name: "started_at",
-    type: "date",
+    type: "timestamp",
     nullable: false,
   })
   startedAt: Date;
