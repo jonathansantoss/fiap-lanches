@@ -17,7 +17,9 @@ class WebHookPaymentService implements IWebHookPaymentService {
   async execute(statusCode: number, orderId: string): Promise<string> {
     let paymentStatus: EOrderPayment = statusCode == 200 ? EOrderPayment.APPROVED : EOrderPayment.REFUSED;
 
-    const order: IOrder = await this.getOrderByIdUseCase.execute(orderId).then(resp => resp);
+    const order: IOrder = await this.getOrderByIdUseCase.execute(orderId).then(resp => {
+      return resp
+    });
 
     if (!order) {
       throw new CustomError(`Order ${orderId} not found`, 404)

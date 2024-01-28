@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "start": "cross-env NEW_RELIC_APP_NAME=Lanches NEW_RELIC_LICENSE_KEY=dae94a5c848e6765825aa0d4f1209e91FFFFNRAL ts-node -r newrelic ./src/index.ts",
+    "start": "ts-node ./src/index.ts",
     "test": "jest"
   },
   "keywords": [],

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { UpdatePaymentController } from "../../controllers/payment/UpdatePaymentController";
-import { validateQuery } from "../../midleware/validator/validate";
+import { validateBody, validateQuery } from "../../midleware/validator/validate";
 import { createPaymentSchema, webHookPaymentSchema } from "../../schemas/PaymentSchemas";
 import { WebHookPaymentController } from "../../controllers/payment/WebHookPaymentController";
 
@@ -85,7 +85,7 @@ paymentRouter.put(
  *                      type: string
  *                      description: Order's ID
  *                   paidAt:
- *                      type: date
+ *                      type: string
  *                      description: Payment datetime
  *                   value:
  *                      type: number
@@ -105,7 +105,7 @@ paymentRouter.put(
  */
 paymentRouter.post(
   "/webhook",
-  validateQuery(webHookPaymentSchema),
+  validateBody(webHookPaymentSchema),
   webHookPaymentController.handler
 );
 
