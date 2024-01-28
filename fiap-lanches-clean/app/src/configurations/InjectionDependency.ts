@@ -31,6 +31,8 @@ import { IGetAllUnfinishedOrdersService } from "../services/interfaces/order/IGe
 import { GetAllUnfinishedOrdersService } from "../services/impl/order/GetAllUnfinishedOrdersService";
 import { IWebHookPaymentService } from "../services/interfaces/payment/IWebHookPaymentService";
 import { WebHookPaymentService } from "../services/impl/payment/WebHookPaymentService";
+import { IGetPaymentStatusByOrderIdService } from "../services/interfaces/payment/IGetPaymentStatusByOrderIdService";
+import { GetPaymentStatusByOrderIdService } from "../services/impl/payment/GetPaymentStatusByOrderIdService";
 
 container.registerSingleton<IProductRepository>(
   "ProductRepository",
@@ -116,5 +118,11 @@ container.registerSingleton<IWebHookPaymentService>(
   "WebHookPaymentService",
   WebHookPaymentService
 )
+
+container.registerSingleton<IGetPaymentStatusByOrderIdService>(
+  "GetPaymentStatusByOrderIdService",
+  GetPaymentStatusByOrderIdService
+)
+
 
 export { container };

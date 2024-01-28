@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const createPaymentSchema = z
+export const paymentByOrderIdSchema = z
   .object({
     orderId: z.string().uuid(),
   })
