@@ -206,6 +206,19 @@ cd fiap-lanches-clean
 cd kubernetes
 ```
 
+
+2.1. Executar todos os comando kubernetes juntos ou segregados igual abaixo:
+```sh
+kubectl apply -f metrics.yaml &&
+kubectl apply -f postgres-secret.yaml &&
+kubectl apply -f svc-postgress.yaml &&
+kubectl apply -f postgres-pv.yaml    &&
+kubectl apply -f postgres-pvc.yaml   &&
+kubectl apply -f postgres-deployment.yaml &&
+kubectl apply -f svc-lanches-api.yaml &&
+kubectl apply -f fiap-lanches-api-deployment.yaml
+```
+
 3. Subir as metricas:
 ```sh
 kubectl apply -f metrics.yaml
