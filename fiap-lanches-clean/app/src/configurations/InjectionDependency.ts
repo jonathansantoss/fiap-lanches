@@ -29,6 +29,8 @@ import { ICreateOrUpdateProductService } from "../services/interfaces/product/IC
 import { CreateOrUpdateProductService } from "../services/impl/product/CreateOrUpdateProductService";
 import { IGetAllUnfinishedOrdersService } from "../services/interfaces/order/IGetAllUnfinishedOrdersService";
 import { GetAllUnfinishedOrdersService } from "../services/impl/order/GetAllUnfinishedOrdersService";
+import { IWebHookPaymentService } from "../services/interfaces/payment/IWebHookPaymentService";
+import { WebHookPaymentService } from "../services/impl/payment/WebHookPaymentService";
 
 container.registerSingleton<IProductRepository>(
   "ProductRepository",
@@ -108,6 +110,11 @@ container.registerSingleton<ICreateOrUpdateProductService>(
 container.registerSingleton<IGetAllUnfinishedOrdersService>(
   "GetAllUnfinishedOrdersService",
   GetAllUnfinishedOrdersService
+)
+
+container.registerSingleton<IWebHookPaymentService>(
+  "WebHookPaymentService",
+  WebHookPaymentService
 )
 
 export { container };
