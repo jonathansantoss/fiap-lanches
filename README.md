@@ -29,13 +29,14 @@
 - [📖 Conteudo](#-conteudo)
 - [✨ Objetivos](#-objetivos)
 - [📜 Arquitetura](#-arquitetura)
+- [📜 Vídeo Explicação Arquitetura](#-explicação-arquitetura)
 - [🌐 Swagger - API Coleção](#-swagger---api-coleção)
 - [📂 Estrutura do Repositório](#-estrutura-do-repositório)
   - [🤖 Executando fiap-lanches - Docker](#-executando-fiap-lanches---docker)
   - [🧪 Testes](#-testes)
   - [🤖 Executando fiap-lanches - Kubernetes](#-executando-fiap-lanches---kubernetes)
   - [🤖 Executando fiap-lanches - helm Local](#-executando-fiap-lanches---helm-local)
-  - [🤖 Executando fiap-lanches - helm repository](#-running-fiap-lanches---helm-repository)
+  - [🤖 Executando fiap-lanches - helm repository](#-executando-fiap-lanches---helm-repository)
 
 ---
 
@@ -56,6 +57,11 @@ Completa
 
 Simplificada
 ![Fiap Lanches Arquitetura](others/architecture/simplified_architecture.png)
+
+
+## 📜 Explicação Arquitetura
+[Link para o vídeo explicativo](https://www.youtube.com/watch?v=aan1C66lmbY)
+
 
 ## 🌐 Swagger - API Coleção
 
@@ -266,7 +272,7 @@ http://localhost:32000/api-docs/
 
 ---
 
-### 🤖 Running fiap-lanches - helm Local
+### 🤖 Executando fiap-lanches - helm Local
 1. Adicione repository metrics-server:
 ```sh
 helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
