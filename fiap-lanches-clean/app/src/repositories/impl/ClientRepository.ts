@@ -1,52 +1,34 @@
 import { IClientRepository } from "../interfaces/IClientRepository";
 import { IClient } from "../../domain/models/IClientModel";
-import { Client } from "../entity/ClientEntity";
-import { AppDataSource } from "../../configurations/DataSource";
-import { Repository } from "typeorm";
+import { IDataSource } from "../dataSource/IDataSource";
 
 class ClientRepository implements IClientRepository {
-  private repository: Repository<Client> = AppDataSource.getRepository(Client);
 
-  save(Client: IClient): void {
-    const clientCreated = this.repository.create(Client);
-    this.repository.save(clientCreated);
+  private dataSource: IDataSource;
+
+  constructor(dataSource: IDataSource) {
+    this.dataSource = dataSource;
+  }
+
+  save(client: IClient): void {
+    this.dataSource.save(client);
   }
 
   async delete(cpf: string): Promise<void> {
-    await this.repository.delete({
-      cpf,
-    });
+    await this.dataSource.deleteOneBy("cpf", cpf);
   }
 
   async findByCpf(cpf: string): Promise<IClient> {
-    // const clientRedis = await redis.get("client:" + cpf);
-
-    // if (clientRedis !== null) {
-    //   return JSON.parse(clientRedis) as IClient;
-    // }
-
-    const client = await this.repository.findOne({
-      where: {
-        cpf,
-      },
-    });
-
-    if (!client) {
-      return client;
-    }
-
-    // await redis.set("client:" + cpf, JSON.stringify(client));
-    // await redis.expire("client:" + cpf, 1000);
-
+    const client = await this.dataSource.findOneBy("cpf", cpf)
     return client;
   }
 
   async update(Client: IClient): Promise<void> {
-    await this.repository.save(Client);
+    await this.dataSource.save(Client);
   }
 
   async getAllClients(): Promise<IClient[]> {
-    return await this.repository.find();
+    return await this.dataSource.findAll();
   }
 }
 

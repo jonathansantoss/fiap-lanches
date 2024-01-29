@@ -7,7 +7,7 @@ import { EProductCategory } from "../../domain/enums/EProductCategory";
 import { IOrderRepository } from "../../repositories/interfaces/IOrderRepository";
 import { IGetOrderByIdService } from "../../services/interfaces/order/IGetOrderByIdService";
 import { UpdateOrderStatusService } from "../../services/impl/order/UpdateOrderStatusService";
-import { CustomError } from "../../services/exceptions/Exceptions";
+import { CustomError } from "../../domain/exceptions/Exceptions";
 
 describe("GetOrderByIdService", () => {
     const product: IProduct[] = [{

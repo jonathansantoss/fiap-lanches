@@ -1,12 +1,11 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
 import { logger } from "./WinstonLog";
-import { Promotion } from "../repositories/entity/PromotionEntity";
-import { Product } from "../repositories/entity/ProductEntity";
-import { Order } from "../repositories/entity/OrderEntity";
-import { Client } from "../repositories/entity/ClientEntity";
-import { Employee } from "../repositories/entity/EmployeeEntity";
-
+import { Promotion } from "./DataSourceModelation/PromotionEntityConfig";
+import { Client } from "./DataSourceModelation/ClientEntityConfig";
+import { Employee } from "./DataSourceModelation/EmployeeEntityConfig";
+import { Order } from "./DataSourceModelation/OrderEntityConfig";
+import { Product } from "./DataSourceModelation/ProductEntityConfig";
 require('dotenv').config();
 
 export const AppDataSource = new DataSource({

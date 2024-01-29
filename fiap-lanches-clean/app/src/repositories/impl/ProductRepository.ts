@@ -1,19 +1,21 @@
 import { IProductRepository } from "../interfaces/IProductRepository";
 import { IProduct } from "../../domain/models/IProductModel";
-import { Product } from "../entity/ProductEntity";
 import { EProductCategory } from "../../domain/enums/EProductCategory";
-import { AppDataSource } from "../../configurations/DataSource";
 import { logger } from "../../configurations/WinstonLog";
-import { In, Repository } from "typeorm";
+import { In } from "typeorm";
+import { IDataSource } from "../dataSource/IDataSource";
 
 class ProductRepository implements IProductRepository {
-  private repository: Repository<Product> =
-    AppDataSource.getRepository(Product);
+  private dataSource: IDataSource;
+
+  constructor(dataSource: IDataSource) {
+    this.dataSource = dataSource;
+  }
+
 
   async saveOrUpdate(product: IProduct): Promise<string> {
-    const productCreated = !product.id ? this.repository.create(product) : product;
 
-    return await this.repository.save(productCreated).then(resp => {
+    return await this.dataSource.save(product).then(resp => {
       if (!resp) {
         return null;
       }
@@ -27,11 +29,7 @@ class ProductRepository implements IProductRepository {
 
   
   async getByCategory(category: EProductCategory): Promise<IProduct[]> {
-    return await this.repository.find({
-      where: {
-        category,
-      },
-    }).then((resp) => {
+    return await this.dataSource.findBy("category", category, null).then((resp) => {
       return resp
     }).catch(error => {
       const message = "Error getting product from database"
@@ -42,7 +40,7 @@ class ProductRepository implements IProductRepository {
 
 
   async delete(id: string): Promise<void> {
-    await this.repository.delete({ id }).then(result => { }).catch(error => {
+    await this.dataSource.delete(id).then(result => { }).catch(error => {
       const message = `Error deleting product (${id}) from database`
       logger.error(`${message}: ${error.message}`)
       throw new Error(message)
@@ -51,24 +49,11 @@ class ProductRepository implements IProductRepository {
 
 
   async getById(id: string): Promise<IProduct> {
-    // const productRedis = await redis.get("productId:" + id);
-
-    // if (productRedis !== null) {
-    //   return Promise.resolve(JSON.parse(productRedis)) as Promise<IProduct>;
-    // }
-    
-    console.log(id)
-    return await this.repository.findOne({
-      where: {
-        id,
-      },
-    }).then(async (resp) => {
+    return await this.dataSource.findOne(id).then(async (resp) => {
       if(!resp) {
         return null
       }
 
-      // await redis.set("productId:" + resp.id, JSON.stringify(resp));
-      // await redis.expire("productId:" + resp.id, 1000);
       return resp
     }).catch(error => {
       console.log(error)
@@ -79,11 +64,7 @@ class ProductRepository implements IProductRepository {
   }
 
   async getByIds(ids: string[]): Promise<IProduct[]> {
-    return await this.repository.find({
-      where: {
-        id: In(ids)
-      },
-    }).then(resp => {
+    return await this.dataSource.findBy("id", In(ids), null).then(resp => {
       return resp
     }).catch(error => {
       const message = "Error getting products from database"

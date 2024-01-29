@@ -1,15 +1,21 @@
 import { Router } from "express";
-import { UpdatePaymentController } from "../../controllers/payment/UpdatePaymentController";
-import { validateBody, validateQuery } from "../../midleware/validator/validate";
+import { GetPaymentStatusByOrderIdController } from "../../../controllers/payment/GetPaymentStatusByOrderIdController";
+import { UpdatePaymentController } from "../../../controllers/payment/UpdatePaymentController";
+import { WebHookPaymentController } from "../../../controllers/payment/WebHookPaymentController";
+import { validateQuery, validateBody } from "../../midleware/validator/validate";
 import { paymentByOrderIdSchema, webHookPaymentSchema } from "../../schemas/PaymentSchemas";
-import { WebHookPaymentController } from "../../controllers/payment/WebHookPaymentController";
-import { GetPaymentStatusByOrderIdController } from "../../controllers/payment/GetPaymentStatusByOrderIdController";
+import { AppDataSource } from "../../../configurations/DataSource";
+import { Order } from "../../../configurations/DataSourceModelation/OrderEntityConfig";
+import { TypeOrmDataSource } from "../../../repositories/dataSource/TypeOrmDataSource";
 
 const paymentRouter = Router();
 
-const updatePaymentController = new UpdatePaymentController();
-const webHookPaymentController = new WebHookPaymentController();
-const getPaymentStatusByOrderIdController = new GetPaymentStatusByOrderIdController();
+const orderDataSource = AppDataSource.getRepository(Order);
+const typeOrmDataSourceOrder = new TypeOrmDataSource(orderDataSource);
+
+const updatePaymentController = new UpdatePaymentController(typeOrmDataSourceOrder);
+const webHookPaymentController = new WebHookPaymentController(typeOrmDataSourceOrder);
+const getPaymentStatusByOrderIdController = new GetPaymentStatusByOrderIdController(typeOrmDataSourceOrder);
 
 /**
 * @swagger

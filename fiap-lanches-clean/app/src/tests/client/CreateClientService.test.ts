@@ -2,7 +2,7 @@ import "reflect-metadata"
 import { IFindClientByCpfService } from "../../services/interfaces/client/IFindClientByCpfService";
 import { IClientRepository } from "../../repositories/interfaces/IClientRepository";
 import { CreateClientService } from "../../services/impl/client/CreateClientService";
-import { CustomError } from "../../services/exceptions/Exceptions";
+import { CustomError } from "../../domain/exceptions/Exceptions";
 
 describe("CreateClientService", () => {
     let createClientService: CreateClientService;

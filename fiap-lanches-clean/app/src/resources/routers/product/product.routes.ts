@@ -2,12 +2,23 @@
 import { Router } from "express";
 import { validateBody, validateParams, validateQuery } from "../../midleware/validator/validate";
 import { GetProductByCategorySchema, ProductIdSchema, SaveProductSchema, UpdateProductSchema } from "../../schemas/ProductSchemas";
-import { GetProductByCategoryController } from "../../controllers/product/GetProductByCategoryController";
-import { DeleteProductController } from "../../controllers/product/DeleteProductController";
-import { CreateOrUpdateProductController } from "../../controllers/product/CreateOrUpdateProductController";
-import { GetProductByIdController } from "../../controllers/product/GetProductByIdController";
+import { CreateOrUpdateProductController } from "../../../controllers/product/CreateOrUpdateProductController";
+import { DeleteProductController } from "../../../controllers/product/DeleteProductController";
+import { GetProductByCategoryController } from "../../../controllers/product/GetProductByCategoryController";
+import { GetProductByIdController } from "../../../controllers/product/GetProductByIdController";
+import { TypeOrmDataSource } from "../../../repositories/dataSource/TypeOrmDataSource";
+import { AppDataSource } from "../../../configurations/DataSource";
+import { Product } from "../../../configurations/DataSourceModelation/ProductEntityConfig";
 
 const productRouter = Router();
+
+const productDataSource = AppDataSource.getRepository(Product);
+const typeOrmDataSourceOrder = new TypeOrmDataSource(productDataSource);
+
+const createOrUpdateProductController = new CreateOrUpdateProductController(typeOrmDataSourceOrder);
+const getProductByCategoryController = new GetProductByCategoryController(typeOrmDataSourceOrder)
+const deleteProductController = new DeleteProductController(typeOrmDataSourceOrder)
+const getProductByIdController = new GetProductByIdController(typeOrmDataSourceOrder)
 
 /**
  * @swagger
@@ -52,7 +63,7 @@ const productRouter = Router();
 productRouter.post(
     "/",
     validateBody(SaveProductSchema),
-    new CreateOrUpdateProductController().handler
+    createOrUpdateProductController.handler
 );
 
 /**
@@ -97,7 +108,7 @@ productRouter.post(
 productRouter.put(
     "/",
     validateBody(UpdateProductSchema),
-    new CreateOrUpdateProductController().handler
+    createOrUpdateProductController.handler
 );
 
 /**
@@ -126,7 +137,7 @@ productRouter.put(
 productRouter.get(
     "/",
     validateQuery(GetProductByCategorySchema),
-    new GetProductByCategoryController().handler
+    getProductByCategoryController.handler
 );
 
 /**
@@ -155,7 +166,7 @@ productRouter.get(
 productRouter.delete(
     "/",
     validateQuery(ProductIdSchema),
-    new DeleteProductController().handler
+    deleteProductController.handler
 );
 
 /**
@@ -184,7 +195,7 @@ productRouter.delete(
 productRouter.get(
     "/:id",
     validateParams(ProductIdSchema),
-    new GetProductByIdController().handler
-  );
+    getProductByIdController.handler
+);
 
 export { productRouter };

@@ -1,9 +1,4 @@
 import { Router } from "express";
-import { CreateClientController } from "../../controllers/client/CreateClientController";
-import { DeleteClientController } from "../../controllers/client/DeleteClientController";
-import { FindClientByCpfController } from "../../controllers/client/FindClientByCpfController";
-import { UpdateClientController } from "../../controllers/client/UpdateClientController";
-import { ListClientsController } from "../../controllers/client/ListClientsController";
 import {
   validateBody,
   validateParams,
@@ -14,13 +9,25 @@ import {
   getClientSchema,
   updateClientSchema,
 } from "../../schemas/ClientSchemas";
+import { CreateClientController } from "../../../controllers/client/CreateClientController";
+import { DeleteClientController } from "../../../controllers/client/DeleteClientController";
+import { FindClientByCpfController } from "../../../controllers/client/FindClientByCpfController";
+import { ListClientsController } from "../../../controllers/client/ListClientsController";
+import { UpdateClientController } from "../../../controllers/client/UpdateClientController";
+import { Client } from "../../../configurations/DataSourceModelation/ClientEntityConfig";
+import { AppDataSource } from "../../../configurations/DataSource";
+import { TypeOrmDataSource } from "../../../repositories/dataSource/TypeOrmDataSource";
 
 const clientRouter = Router();
-const createClientController = new CreateClientController();
-const deleteClientController = new DeleteClientController();
-const findClientByCpfController = new FindClientByCpfController();
-const updateClientController = new UpdateClientController();
-const listClientsController = new ListClientsController();
+
+const clientRepositorySource = AppDataSource.getRepository(Client);
+const typeOrmDataSource = new TypeOrmDataSource(clientRepositorySource);
+
+const createClientController = new CreateClientController(typeOrmDataSource);
+const deleteClientController = new DeleteClientController(typeOrmDataSource);
+const findClientByCpfController = new FindClientByCpfController(typeOrmDataSource);
+const updateClientController = new UpdateClientController(typeOrmDataSource);
+const listClientsController = new ListClientsController(typeOrmDataSource);
 
 /**
  * @swagger

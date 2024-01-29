@@ -1,4 +1,5 @@
 import { IEmployee } from "../../domain/models/IEmployeeModel";
+
 interface IEmployeeRepository {
     save(employee: IEmployee): Promise<void>;
     delete(cpf: string): Promise<void>;
