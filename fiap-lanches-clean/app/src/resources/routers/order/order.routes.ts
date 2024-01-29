@@ -1,12 +1,31 @@
 import { Router } from "express";
-import { CreateOrderController } from "../../controllers/order/CreateOrderController";
 import { validateBody, validateQuery } from "../../midleware/validator/validate";
 import { GetByStatusSchema, SaveOrderSchema, UpdateStatusSchema } from "../../schemas/OrderSchemas";
-import { UpdateOrderStatusController } from "../../controllers/order/UpdateOrderStatusController";
-import { GetOrderByStatusController } from "../../controllers/order/GetOrderByStatusController";
-import { GetAllUnfinishedOrdersController } from "../../controllers/order/GetAllUnfinishedOrdersController";
+import { CreateOrderController } from "../../../controllers/order/CreateOrderController";
+import { GetAllUnfinishedOrdersController } from "../../../controllers/order/GetAllUnfinishedOrdersController";
+import { GetOrderByStatusController } from "../../../controllers/order/GetOrderByStatusController";
+import { UpdateOrderStatusController } from "../../../controllers/order/UpdateOrderStatusController";
+import { AppDataSource } from "../../../configurations/DataSource";
+import { Client } from "../../../configurations/DataSourceModelation/ClientEntityConfig";
+import { TypeOrmDataSource } from "../../../repositories/dataSource/TypeOrmDataSource";
+import { Order } from "../../../configurations/DataSourceModelation/OrderEntityConfig";
+import { Product } from "../../../configurations/DataSourceModelation/ProductEntityConfig";
 
 const orderRouter = Router();
+
+const clientRepositorySource = AppDataSource.getRepository(Client);
+const typeOrmDataSourceClient = new TypeOrmDataSource(clientRepositorySource);
+
+const orderDataSource = AppDataSource.getRepository(Order);
+const typeOrmDataSourceOrder = new TypeOrmDataSource(orderDataSource);
+
+const productDataSource = AppDataSource.getRepository(Product);
+const typeOrmDataSourceProduct = new TypeOrmDataSource(productDataSource);
+
+const createOrderController = new CreateOrderController(typeOrmDataSourceOrder, typeOrmDataSourceClient, typeOrmDataSourceProduct);
+const updateOrderStatusController = new UpdateOrderStatusController(typeOrmDataSourceOrder);
+const getOrderByStatusController = new GetOrderByStatusController(typeOrmDataSourceOrder);
+const getAllUnfinishedOrdersController = new GetAllUnfinishedOrdersController(typeOrmDataSourceOrder);
 
 /**
  * @swagger
@@ -48,7 +67,7 @@ const orderRouter = Router();
  */
 orderRouter.post("/",
     validateBody(SaveOrderSchema),
-    new CreateOrderController().handler);
+    createOrderController.handler);
 
 
 /**
@@ -84,7 +103,8 @@ orderRouter.post("/",
  */
 orderRouter.put("/",
     validateQuery(UpdateStatusSchema),
-    new UpdateOrderStatusController().handler);
+    updateOrderStatusController.handler);
+
 
 
 /**
@@ -112,7 +132,7 @@ orderRouter.put("/",
  */
 orderRouter.get("/",
     validateQuery(GetByStatusSchema),
-    new GetOrderByStatusController().handler);
+    getOrderByStatusController.handler);
 
 /**
 * @swagger
@@ -129,6 +149,6 @@ orderRouter.get("/",
  *         description: Internal server error
  */
 orderRouter.get("/unfinished",
-    new GetAllUnfinishedOrdersController().handler);
+    getAllUnfinishedOrdersController.handler);
 
 export { orderRouter };

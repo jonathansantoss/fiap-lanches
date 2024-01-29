@@ -1,38 +1,33 @@
 import { IEmployeeRepository } from "../interfaces/IEmployeeRepository";
 import { IEmployee } from "../../domain/models/IEmployeeModel";
-import { Employee } from "../entity/EmployeeEntity";
-import { AppDataSource } from "../../configurations/DataSource";
-import { Repository } from "typeorm";
+import { IDataSource } from "../dataSource/IDataSource";
 
 class EmployeeRepository implements IEmployeeRepository {
-  private repository: Repository<Employee> =
-    AppDataSource.getRepository(Employee);
+
+  private dataSource: IDataSource;
+
+  constructor(dataSource: IDataSource) {
+    this.dataSource = dataSource;
+  }
 
   async save(employee: IEmployee): Promise<void> {
-    const employeeCreated = this.repository.create(employee);
-    await this.repository.save(employeeCreated);
+    await this.dataSource.save(employee);
   }
 
   async delete(cpf: string): Promise<void> {
-    await this.repository.delete({
-      cpf,
-    });
+    await this.dataSource.deleteOneBy("cpf", cpf);
   }
 
   async update(employee: IEmployee): Promise<void> {
-    await this.repository.save(employee);
+    await this.dataSource.save(employee);
   }
 
   async getAll(): Promise<IEmployee[]> {
-    return await this.repository.find();
+    return await this.dataSource.findAll();
   }
 
   async findByCpf(cpf: string): Promise<IEmployee> {
-    return await this.repository.findOne({
-      where: {
-        cpf,
-      },
-    });
+    return await this.dataSource.findOneBy("cpf", cpf);
   }
 }
 

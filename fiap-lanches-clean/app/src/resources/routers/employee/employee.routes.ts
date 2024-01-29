@@ -1,8 +1,4 @@
 import { Router } from "express";
-import { CreateEmployeeController } from "../../controllers/employee/CreateEmployeeController";
-import { DeleteEmployeeController } from "../../controllers/employee/DeleteEmployeeController";
-import { UpdateEmployeeController } from "../../controllers/employee/UpdateEmployeeController";
-import { ListEmployeesController } from "../../controllers/employee/ListEmployeesController";
 import {
   validateBody,
   validateParams,
@@ -12,12 +8,23 @@ import {
   deleteEmployeeSchema,
   updateEmployeeSchema,
 } from "../../schemas/EmployeeSchemas";
+import { CreateEmployeeController } from "../../../controllers/employee/CreateEmployeeController";
+import { DeleteEmployeeController } from "../../../controllers/employee/DeleteEmployeeController";
+import { ListEmployeesController } from "../../../controllers/employee/ListEmployeesController";
+import { UpdateEmployeeController } from "../../../controllers/employee/UpdateEmployeeController";
+import { AppDataSource } from "../../../configurations/DataSource";
+import { Employee } from "../../../configurations/DataSourceModelation/EmployeeEntityConfig";
+import { TypeOrmDataSource } from "../../../repositories/dataSource/TypeOrmDataSource";
 
 const employeeRouter = Router();
-const createEmployeeController = new CreateEmployeeController();
-const deleteEmployeeController = new DeleteEmployeeController();
-const updateEmployeeController = new UpdateEmployeeController();
-const listEmployeesController = new ListEmployeesController();
+
+const clientRepositorySource = AppDataSource.getRepository(Employee);
+const typeOrmDataSource = new TypeOrmDataSource(clientRepositorySource);
+
+const createEmployeeController = new CreateEmployeeController(typeOrmDataSource);
+const deleteEmployeeController = new DeleteEmployeeController(typeOrmDataSource);
+const updateEmployeeController = new UpdateEmployeeController(typeOrmDataSource);
+const listEmployeesController = new ListEmployeesController(typeOrmDataSource);
 
 /**
  * @swagger

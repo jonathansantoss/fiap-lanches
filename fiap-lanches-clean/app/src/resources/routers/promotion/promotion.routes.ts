@@ -1,10 +1,25 @@
 
 import { Router } from "express";
-import { validateBody, validateParams, validateQuery } from "../../midleware/validator/validate";
-import { CreateOrUpdatePromotionController } from "../../controllers/promotion/CreateOrUpdatePromotionController";
+import { validateBody, validateParams } from "../../midleware/validator/validate";
+import { CancelPromotionController } from "../../../controllers/promotion/CancelPromotionController";
+import { CreateOrUpdatePromotionController } from "../../../controllers/promotion/CreateOrUpdatePromotionController";
+import { GetPromotionByidController } from "../../../controllers/promotion/GetPromotionByIdController";
 import { SavePromotionSchema, ValidatePromotionId } from "../../schemas/PromotionSchemas";
-import { GetPromotionByidController } from "../../controllers/promotion/GetPromotionByIdController";
-import { CancelPromotionController } from "../../controllers/promotion/CancelPromotionController";
+import { Promotion } from "../../../configurations/DataSourceModelation/PromotionEntityConfig";
+import { Product } from "../../../configurations/DataSourceModelation/ProductEntityConfig";
+import { AppDataSource } from "../../../configurations/DataSource";
+import { TypeOrmDataSource } from "../../../repositories/dataSource/TypeOrmDataSource";
+
+const productDataSource = AppDataSource.getRepository(Product);
+const typeOrmDataSourceProduct = new TypeOrmDataSource(productDataSource);
+
+const promotiontDataSource = AppDataSource.getRepository(Promotion);
+const typeOrmDataSourcePromotion = new TypeOrmDataSource(promotiontDataSource);
+
+const createOrUpdatePromotionController = new CreateOrUpdatePromotionController(typeOrmDataSourcePromotion , typeOrmDataSourceProduct);
+const getPromotionByidController = new GetPromotionByidController(typeOrmDataSourcePromotion);
+const cancelPromotionController = new CancelPromotionController(typeOrmDataSourcePromotion, typeOrmDataSourceProduct);
+
 const promotionRouter = Router();
 /**
  * @swagger
@@ -54,7 +69,7 @@ const promotionRouter = Router();
 promotionRouter.post(
   "/",
   validateBody(SavePromotionSchema),
-  new CreateOrUpdatePromotionController().handler
+  createOrUpdatePromotionController.handler
 );
 
 /**
@@ -83,7 +98,7 @@ promotionRouter.post(
 promotionRouter.get(
   "/:id",
   validateParams(ValidatePromotionId),
-  new GetPromotionByidController().handler
+  getPromotionByidController.handler
 );
 
 
@@ -115,7 +130,7 @@ promotionRouter.get(
 promotionRouter.delete(
   "/:id",
   validateParams(ValidatePromotionId),
-  new CancelPromotionController().handler
+  cancelPromotionController.handler
 );
 
 export { promotionRouter };
