@@ -29,14 +29,12 @@
 - [📖 Conteudo](#-conteudo)
 - [✨ Objetivos](#-objetivos)
 - [📜 Arquitetura](#-arquitetura)
-- [📜 Vídeo Explicação Arquitetura](#-explicação-arquitetura)
+- [📜 Explicação Arquitetura](#-explicação-arquitetura)
 - [🌐 Swagger - API Coleção](#-swagger---api-coleção)
-- [📂 Estrutura do Repositório](#-estrutura-do-repositório)
+- [📂 Estrutura do repositório](#-estrutura-do-repositório)
   - [🤖 Executando fiap-lanches - Docker](#-executando-fiap-lanches---docker)
   - [🧪 Testes](#-testes)
   - [🤖 Executando fiap-lanches - Kubernetes](#-executando-fiap-lanches---kubernetes)
-  - [🤖 Executando fiap-lanches - helm Local](#-executando-fiap-lanches---helm-local)
-  - [🤖 Executando fiap-lanches - helm repository](#-executando-fiap-lanches---helm-repository)
 
 ---
 
@@ -268,82 +266,6 @@ kubectl apply -f fiap-lanches-api-deployment.yaml
 11. Acesse o swagger:
 ```sh
 http://localhost:32000/api-docs/
-```
-
----
-
-### 🤖 Executando fiap-lanches - helm Local
-1. Adicione repository metrics-server:
-```sh
-helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
-```
-
-2. Instale o chart metrics-server:
-```sh
-helm install my-metrics-server metrics-server/metrics-server --version 3.11.0
-```
-
-3. Acessar a pasta helm/postgres-helm/:
-```sh
-cd helm/postgres-helm/
-```
-
-4. Gerar o pacote com helm:
-```sh
-helm package postgres-fiap-lanches   
-```
-
-5. Fazer instalação do postgres-fiap-lanches:
-```sh
-helm install postgres-fiap-lanches ./docs/postgres-fiap-lanches-0.1.0.tgz  
-```
-
-6. Acessar a posta helm/fiap-lanches-helm/:
-```sh
-cd helm/fiap-lanches-helm/
-```
-
-7. Gerar o pacote com helm:
-```sh
-helm package fiap-lanches   
-```
-
-8. Fazer instalação do fiap-lanches:
-```sh
-helm install fiap-lanches ./docs/fiap-lanches-0.1.0.tgz  
-```
-
----
-
-### 🤖 Executando fiap-lanches - helm repository
-1. Adicione o repositório metrics-server:
-```sh
-helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
-```
-
-2. Intale o chart metrics-server:
-```sh
-helm install my-metrics-server metrics-server/metrics-server --version 3.11.0
-```
-
-3. Adicione o repositório postgres-fiap-lanches:
-```sh
-helm repo add postgres-fiap-lanches https://jonathansantoss.github.io/postgres-fiap-lanches
-```
-
-4. Instale o chart postgres-fiap-lanches:
-```sh
-helm install svc-postgres postgres-fiap-lanches/svc-postgres --version 0.1.0
-```
-
-5. Adicione o repositório fiap-lanches:
-```sh
-helm repo add fiap-lanches https://jonathansantoss.github.io/fiap-lanches-helm
-```
-
-6. Intale o chart fiap-lanches:
-```sh
-helm install fiap-lanches fiap-lanches/fiap-lanches --version 0.1.0
 ```
 
 ---
