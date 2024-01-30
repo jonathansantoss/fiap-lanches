@@ -1,7 +1,6 @@
 
 import { In, Repository } from "typeorm";
 import { AppDataSource } from "../../../../config/DataSource";
-import { logger } from '../../../../config/WinstonLog';
 import { IPromotionRepository } from "../../../../core/applications/ports/out/promotion/IPromotion.repository";
 import { IPromotion } from "../../../../core/domain/entities/IPromotion";
 import { Promotion } from "../../../data/Promotion.model";
@@ -17,7 +16,6 @@ class PromotionRepository implements IPromotionRepository {
             return resp.id
         }).catch(error => {
             const message = `Error on ${promotion.id ? "updating" : "creating"} promotion in database`
-            logger.error(`${message}: ${error.message}`)
             throw new Error(message)
         });
     }
@@ -27,7 +25,6 @@ class PromotionRepository implements IPromotionRepository {
             return resp
         }).catch(error => {
             const message = `Error on getting product id: ${productId} from promotion in database`
-            logger.error(`${message}: ${error.message}`)
             throw new Error(message)
         });
     }
@@ -41,7 +38,6 @@ class PromotionRepository implements IPromotionRepository {
             return resp
         }).catch(error => {
             const message = `Error on getting ${id} promotion in database`
-            logger.error(`${message}: ${error.message}`)
             throw new Error(message)
         });
     }

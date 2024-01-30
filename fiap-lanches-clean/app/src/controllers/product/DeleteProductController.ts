@@ -1,15 +1,17 @@
 import { Request, Response } from "express";
-import { logger } from "../../configurations/WinstonLog";
 import { DeleteProductService } from "../../useCases/impl/product/DeleteProductService";
 import { IDataSource } from "../../repositories/dataSource/IDataSource";
 import { ProductRepository } from "../../repositories/impl/ProductRepository";
+import { ILogger } from "../../configurations/Logger/ILogger";
 
 class DeleteProductController {
     
     public dataSource: IDataSource;
+    public logger: ILogger;
 
-    constructor(dataSource: IDataSource) {
+    constructor(dataSource: IDataSource, logger: ILogger) {
         this.dataSource = dataSource;
+        this.logger = logger;
     }
 
     handler = async (request: Request, response: Response) => {
@@ -20,7 +22,7 @@ class DeleteProductController {
             response.status(204).send()
         }
         ).catch(error => {
-            logger.error(`Delete product: ${error.message}`)
+            this.logger.error(`Delete product: ${error.message}`)
             response.status(500).send({ "error": error.message });
         })
 

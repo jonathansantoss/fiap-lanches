@@ -1,15 +1,17 @@
 
 import { Request, Response } from "express";
-import { logger } from "../../configurations/WinstonLog";
 import { GetPromotionByIdService } from "../../useCases/impl/promotion/GetPromotionByIdService";
 import { IDataSource } from "../../repositories/dataSource/IDataSource";
 import { PromotionRepository } from "../../repositories/impl/PromotionRepository";
+import { ILogger } from "../../configurations/Logger/ILogger";
 
 class GetPromotionByidController {
     public dataSource: IDataSource;
+    public logger: ILogger;
 
-    constructor(dataSource: IDataSource) {
+    constructor(dataSource: IDataSource, logger: ILogger) {
         this.dataSource = dataSource;
+        this.logger = logger;
     }
 
     handler = async (request: Request, response: Response) => {
@@ -19,7 +21,7 @@ class GetPromotionByidController {
         getPromotionById.execute(request.params.id, promotionRepository).then(resp => {
             response.status(200).send({ "message": 'Promotion found', "id": resp })
         }).catch(error => {
-            logger.error(`Get promotion: ${error.message}`)
+            this.logger.error(`Get promotion: ${error.message}`)
             response.status(500).send({ "error": error.message });
         })
     }

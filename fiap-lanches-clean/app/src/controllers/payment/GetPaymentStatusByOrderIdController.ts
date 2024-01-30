@@ -1,16 +1,18 @@
 import { Request, Response } from "express";
-import { logger } from "../../configurations/WinstonLog";
 import { GetPaymentStatusByOrderIdService } from "../../useCases/impl/payment/GetPaymentStatusByOrderIdService";
 import { IDataSource } from "../../repositories/dataSource/IDataSource";
 import { OrderRepository } from "../../repositories/impl/OrderRepository";
 import { GetOrderByIdService } from "../../useCases/impl/order/GetOrderByIdService";
+import { ILogger } from "../../configurations/Logger/ILogger";
 
 class GetPaymentStatusByOrderIdController {
 
     public dataSourceOrder: IDataSource;
+    public logger: ILogger;
 
-    constructor(dataSourceOrder: IDataSource) {
+    constructor(dataSourceOrder: IDataSource, logger: ILogger) {
         this.dataSourceOrder = dataSourceOrder;
+        this.logger = logger;
     }
 
 
@@ -22,7 +24,7 @@ class GetPaymentStatusByOrderIdController {
         getPaymentStatusByOrderId.execute(request.query.orderId as string, getOrderByIdService, orderRepository).then(resp => {
             response.status(200).send({ "message": `Payment status recovered`, "order": resp })
         }).catch(error => {
-            logger.error(`Webhook payment error: ${error.message}`)
+            this.logger.error(`Webhook payment error: ${error.message}`)
             response.status(500).send({ "error": error.message });
         })
     }

@@ -1,17 +1,19 @@
 import { Request, Response } from "express";
-import { logger } from "../../configurations/WinstonLog";
 import { EOrderStatus } from "../../domain/enums/EOrderStatus";
 import { UpdateOrderStatusService } from "../../useCases/impl/order/UpdateOrderStatusService";
 import { IDataSource } from "../../repositories/dataSource/IDataSource";
 import { OrderRepository } from "../../repositories/impl/OrderRepository";
 import { GetOrderByIdService } from "../../useCases/impl/order/GetOrderByIdService";
+import { ILogger } from "../../configurations/Logger/ILogger";
 
 class UpdateOrderStatusController {
 
     public dataSource: IDataSource;
+    public logger: ILogger;
 
-    constructor(dataSource: IDataSource) {
+    constructor(dataSource: IDataSource, logger: ILogger) {
         this.dataSource = dataSource;
+        this.logger = logger
     }
 
     handler = async (request: Request, response: Response) => {
@@ -23,7 +25,7 @@ class UpdateOrderStatusController {
             response.status(200).send({ "message": "Order updated", "orderId": resp });
         }
         ).catch(error => {
-            logger.error(`Put order status: ${error.message}`)
+            this.logger.error(`Put order status: ${error.message}`)
             response.status(error.status ? error.status : 500).send({ "error": error.message })
         })
     }

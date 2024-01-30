@@ -9,16 +9,18 @@ import { GetProductByIdController } from "../../../controllers/product/GetProduc
 import { TypeOrmDataSource } from "../../../repositories/dataSource/TypeOrmDataSource";
 import { AppDataSource } from "../../../configurations/DataSource";
 import { Product } from "../../../configurations/DataSourceModelation/ProductEntityConfig";
+import { LoggerImpl } from "../../../configurations/Logger/LoggerImpl";
 
 const productRouter = Router();
 
+const logger = new LoggerImpl();
 const productDataSource = AppDataSource.getRepository(Product);
 const typeOrmDataSourceOrder = new TypeOrmDataSource(productDataSource);
 
-const createOrUpdateProductController = new CreateOrUpdateProductController(typeOrmDataSourceOrder);
-const getProductByCategoryController = new GetProductByCategoryController(typeOrmDataSourceOrder)
-const deleteProductController = new DeleteProductController(typeOrmDataSourceOrder)
-const getProductByIdController = new GetProductByIdController(typeOrmDataSourceOrder)
+const createOrUpdateProductController = new CreateOrUpdateProductController(typeOrmDataSourceOrder, logger);
+const getProductByCategoryController = new GetProductByCategoryController(typeOrmDataSourceOrder, logger)
+const deleteProductController = new DeleteProductController(typeOrmDataSourceOrder, logger)
+const getProductByIdController = new GetProductByIdController(typeOrmDataSourceOrder, logger)
 
 /**
  * @swagger
