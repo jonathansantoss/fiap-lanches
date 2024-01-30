@@ -1,6 +1,5 @@
 
 import { Request, Response } from "express";
-import { logger } from "../../configurations/WinstonLog";
 import { CancelPromotionService } from "../../useCases/impl/promotion/CancelPromotionService";
 import { IDataSource } from "../../repositories/dataSource/IDataSource";
 import { ProductRepository } from "../../repositories/impl/ProductRepository";
@@ -10,15 +9,18 @@ import { GetProductByIdService } from "../../useCases/impl/product/GetProductByI
 import { CreateOrUpdatePromotionService } from "../../useCases/impl/promotion/CreateOrUpdatePromotionService";
 import { GetActivePromotionsByProductIdService } from "../../useCases/impl/promotion/GetActivePromotionsByProductIdService";
 import { GetPromotionByIdService } from "../../useCases/impl/promotion/GetPromotionByIdService";
+import { ILogger } from "../../configurations/Logger/ILogger";
 
 class CancelPromotionController {
 
     public dataSource: IDataSource;
     public productDataSource: IDataSource;
+    public logger: ILogger;
 
-    constructor(dataSource: IDataSource, productDataSource: IDataSource) {
+    constructor(dataSource: IDataSource, productDataSource: IDataSource, logger: ILogger) {
         this.dataSource = dataSource;
         this.productDataSource = productDataSource;
+        this.logger = logger;
     }
 
 
@@ -46,7 +48,7 @@ class CancelPromotionController {
         ).then(resp => {
             response.status(200).send({ "message": 'Promotion cancelled' })
         }).catch(error => {
-            logger.error(`Delete promotion: ${error.message}`)
+            this.logger.error(`Delete promotion: ${error.message}`)
             response.status(500).send({ "error": error.message });
         })
     }

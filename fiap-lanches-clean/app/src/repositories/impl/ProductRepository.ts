@@ -1,7 +1,6 @@
 import { IProductRepository } from "../interfaces/IProductRepository";
 import { IProduct } from "../../domain/models/IProductModel";
 import { EProductCategory } from "../../domain/enums/EProductCategory";
-import { logger } from "../../configurations/WinstonLog";
 import { In } from "typeorm";
 import { IDataSource } from "../dataSource/IDataSource";
 
@@ -22,7 +21,6 @@ class ProductRepository implements IProductRepository {
       return resp.id
     }).catch(error => {
       const message = `Error on ${product.id ? "updating" : "creating"} product in database`
-      logger.error(`${message}: ${error.message}`)
       throw new Error(message)
     });
   }
@@ -33,7 +31,6 @@ class ProductRepository implements IProductRepository {
       return resp
     }).catch(error => {
       const message = "Error getting product from database"
-      logger.error(`${message}: ${error.message}`)
       throw new Error(message)
     });
   }
@@ -42,7 +39,6 @@ class ProductRepository implements IProductRepository {
   async delete(id: string): Promise<void> {
     await this.dataSource.delete(id).then(result => { }).catch(error => {
       const message = `Error deleting product (${id}) from database`
-      logger.error(`${message}: ${error.message}`)
       throw new Error(message)
     });
   }
@@ -58,7 +54,6 @@ class ProductRepository implements IProductRepository {
     }).catch(error => {
       console.log(error)
       const message = "Error getting product from database"
-      logger.error(`${message}: ${error.message}`)
       throw new Error(message)
     });
   }
@@ -68,7 +63,6 @@ class ProductRepository implements IProductRepository {
       return resp
     }).catch(error => {
       const message = "Error getting products from database"
-      logger.error(`${message}: ${error.message}`)
       throw new Error(message)
     });
   }

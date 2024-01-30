@@ -4,7 +4,6 @@ import { IOrder } from "../../../../core/domain/entities/IOrder.entity";
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../../../config/DataSource";
 import { Order } from "../../../data/Order.model";
-import { logger } from "../../../../config/WinstonLog";
 import { EOrderStatus } from "../../../../core/domain/enums/EOrderStatus";
 // import { redis } from "../../../../config/RedisConfig";
 
@@ -22,7 +21,6 @@ class OrderRepository implements IOrderRepository {
       .catch((error) => {
         const message = `Error on ${order.id ? "updation" : "creating"
           } order in database`;
-        logger.error(`${message}: ${error.message}`);
         throw new Error(message);
       });
   }
@@ -50,7 +48,6 @@ class OrderRepository implements IOrderRepository {
       })
       .catch((error) => {
         const message = "Error getting order from database";
-        logger.error(`${message}: ${error.message}`);
         throw new Error(message);
       });
   }
@@ -75,7 +72,6 @@ class OrderRepository implements IOrderRepository {
       })
       .catch((error) => {
         const message = "Error getting order from database";
-        logger.error(`${message}: ${error.message}`);
         throw new Error(message);
       });
   }

@@ -9,6 +9,7 @@ import { Promotion } from "../../../configurations/DataSourceModelation/Promotio
 import { Product } from "../../../configurations/DataSourceModelation/ProductEntityConfig";
 import { AppDataSource } from "../../../configurations/DataSource";
 import { TypeOrmDataSource } from "../../../repositories/dataSource/TypeOrmDataSource";
+import { LoggerImpl } from "../../../configurations/Logger/LoggerImpl";
 
 const productDataSource = AppDataSource.getRepository(Product);
 const typeOrmDataSourceProduct = new TypeOrmDataSource(productDataSource);
@@ -16,9 +17,11 @@ const typeOrmDataSourceProduct = new TypeOrmDataSource(productDataSource);
 const promotiontDataSource = AppDataSource.getRepository(Promotion);
 const typeOrmDataSourcePromotion = new TypeOrmDataSource(promotiontDataSource);
 
-const createOrUpdatePromotionController = new CreateOrUpdatePromotionController(typeOrmDataSourcePromotion , typeOrmDataSourceProduct);
-const getPromotionByidController = new GetPromotionByidController(typeOrmDataSourcePromotion);
-const cancelPromotionController = new CancelPromotionController(typeOrmDataSourcePromotion, typeOrmDataSourceProduct);
+const logger = new LoggerImpl();
+
+const createOrUpdatePromotionController = new CreateOrUpdatePromotionController(typeOrmDataSourcePromotion, typeOrmDataSourceProduct, logger);
+const getPromotionByidController = new GetPromotionByidController(typeOrmDataSourcePromotion, logger);
+const cancelPromotionController = new CancelPromotionController(typeOrmDataSourcePromotion, typeOrmDataSourceProduct, logger);
 
 const promotionRouter = Router();
 /**

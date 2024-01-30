@@ -1,7 +1,6 @@
 import { IOrderRepository } from "../interfaces/IOrderRepository";
 import { IOrder } from "../../domain/models/IOrderModel";
 import { EOrderStatus } from "../../domain/enums/EOrderStatus";
-import { logger } from "../../configurations/WinstonLog";
 import { Repository, Not } from "typeorm";
 import { IDataSource } from "../dataSource/IDataSource";
 
@@ -20,7 +19,6 @@ class OrderRepository implements IOrderRepository {
       .catch((error) => {
         const message = `Error on ${order.id ? "updation" : "creating"
           } order in database`;
-        logger.error(`${message}: ${error.message}`);
         throw new Error(message);
       });
   }
@@ -37,7 +35,6 @@ class OrderRepository implements IOrderRepository {
       })
       .catch((error) => {
         const message = "Error getting order from database";
-        logger.error(`${message}: ${error.message}`);
         throw new Error(message);
       });
   }
@@ -51,7 +48,6 @@ class OrderRepository implements IOrderRepository {
       })
       .catch((error) => {
         const message = "Error getting order from database";
-        logger.error(`${message}: ${error.message}`);
         throw new Error(message);
       });
   }
@@ -67,7 +63,6 @@ class OrderRepository implements IOrderRepository {
     })
       .catch((error) => {
         const message = "Error getting orders from database";
-        logger.error(`${message}: ${error.message}`);
         throw new Error(`${message}: ${error.message}`);
       });
 

@@ -1,14 +1,16 @@
 import { Request, Response } from "express";
-import { logger } from "../../configurations/WinstonLog";
 import { GetProductByIdService } from "../../useCases/impl/product/GetProductByIdService";
 import { IDataSource } from "../../repositories/dataSource/IDataSource";
 import { ProductRepository } from "../../repositories/impl/ProductRepository";
+import { ILogger } from "../../configurations/Logger/ILogger";
 
 class GetProductByIdController {
   public dataSource: IDataSource;
+  public logger: ILogger;
 
-  constructor(dataSource: IDataSource) {
+  constructor(dataSource: IDataSource, logger: ILogger) {
     this.dataSource = dataSource;
+    this.logger = logger;
   }
 
 
@@ -19,7 +21,7 @@ class GetProductByIdController {
     getProductByIdService.execute(request.query.id as string, productRepository).then(resp => {
       response.status(200).send({ "message": "Product found", "product": resp })
     }).catch(error => {
-      logger.error(`Get product by id: ${error.message}`)
+      this.logger.error(`Get product by id: ${error.message}`)
       response.status(500).send({ "error": error.message });
     })
   }

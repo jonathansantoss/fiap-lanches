@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { IDataSource } from "../../repositories/dataSource/IDataSource";
 import { ClientRepository } from "../../repositories/impl/ClientRepository";
-import { CreateClientService } from "../../useCases/impl/client/CreateClientService";
 import { FindClientByCpfService } from "../../useCases/impl/client/FindClientByCpfService";
 import { UpdateClientService } from "../../useCases/impl/client/UpdateClientService";
 

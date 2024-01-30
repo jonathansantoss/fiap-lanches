@@ -10,8 +10,11 @@ import { Client } from "../../../configurations/DataSourceModelation/ClientEntit
 import { TypeOrmDataSource } from "../../../repositories/dataSource/TypeOrmDataSource";
 import { Order } from "../../../configurations/DataSourceModelation/OrderEntityConfig";
 import { Product } from "../../../configurations/DataSourceModelation/ProductEntityConfig";
+import { LoggerImpl } from "../../../configurations/Logger/LoggerImpl";
 
 const orderRouter = Router();
+
+const logger = new LoggerImpl();
 
 const clientRepositorySource = AppDataSource.getRepository(Client);
 const typeOrmDataSourceClient = new TypeOrmDataSource(clientRepositorySource);
@@ -22,10 +25,10 @@ const typeOrmDataSourceOrder = new TypeOrmDataSource(orderDataSource);
 const productDataSource = AppDataSource.getRepository(Product);
 const typeOrmDataSourceProduct = new TypeOrmDataSource(productDataSource);
 
-const createOrderController = new CreateOrderController(typeOrmDataSourceOrder, typeOrmDataSourceClient, typeOrmDataSourceProduct);
-const updateOrderStatusController = new UpdateOrderStatusController(typeOrmDataSourceOrder);
-const getOrderByStatusController = new GetOrderByStatusController(typeOrmDataSourceOrder);
-const getAllUnfinishedOrdersController = new GetAllUnfinishedOrdersController(typeOrmDataSourceOrder);
+const createOrderController = new CreateOrderController(typeOrmDataSourceOrder, typeOrmDataSourceClient, typeOrmDataSourceProduct, logger);
+const updateOrderStatusController = new UpdateOrderStatusController(typeOrmDataSourceOrder, logger);
+const getOrderByStatusController = new GetOrderByStatusController(typeOrmDataSourceOrder, logger);
+const getAllUnfinishedOrdersController = new GetAllUnfinishedOrdersController(typeOrmDataSourceOrder, logger);
 
 /**
  * @swagger

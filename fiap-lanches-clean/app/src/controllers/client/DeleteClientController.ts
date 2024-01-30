@@ -3,13 +3,16 @@ import { ClientRepository } from "../../repositories/impl/ClientRepository";
 import { IDataSource } from "../../repositories/dataSource/IDataSource";
 import { FindClientByCpfService } from "../../useCases/impl/client/FindClientByCpfService";
 import { DeleteClientService } from "../../useCases/impl/client/DeleteClientService";
+import { ILogger } from "../../configurations/Logger/ILogger";
 
 class DeleteClientController {
 
-  private dataSource: IDataSource;
+  public dataSource: IDataSource;
+  public logger: ILogger;
 
-  constructor(dataSource: IDataSource) {
+  constructor(dataSource: IDataSource, logger: ILogger) {
     this.dataSource = dataSource;
+    this.logger = logger
   }
 
   handler = async (request: Request, response: Response): Promise<Response> => {

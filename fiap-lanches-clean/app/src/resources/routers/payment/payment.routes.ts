@@ -7,15 +7,17 @@ import { paymentByOrderIdSchema, webHookPaymentSchema } from "../../schemas/Paym
 import { AppDataSource } from "../../../configurations/DataSource";
 import { Order } from "../../../configurations/DataSourceModelation/OrderEntityConfig";
 import { TypeOrmDataSource } from "../../../repositories/dataSource/TypeOrmDataSource";
+import { LoggerImpl } from "../../../configurations/Logger/LoggerImpl";
 
 const paymentRouter = Router();
 
+const logger = new LoggerImpl();
 const orderDataSource = AppDataSource.getRepository(Order);
 const typeOrmDataSourceOrder = new TypeOrmDataSource(orderDataSource);
 
 const updatePaymentController = new UpdatePaymentController(typeOrmDataSourceOrder);
-const webHookPaymentController = new WebHookPaymentController(typeOrmDataSourceOrder);
-const getPaymentStatusByOrderIdController = new GetPaymentStatusByOrderIdController(typeOrmDataSourceOrder);
+const webHookPaymentController = new WebHookPaymentController(typeOrmDataSourceOrder, logger);
+const getPaymentStatusByOrderIdController = new GetPaymentStatusByOrderIdController(typeOrmDataSourceOrder, logger);
 
 /**
 * @swagger

@@ -1,19 +1,19 @@
 import { Request, Response } from "express";
-import { container } from "tsyringe";
-import { logger } from "../../configurations/WinstonLog";
 import { EOrderStatus } from "../../domain/enums/EOrderStatus";
 import { GetOrderByStatusService } from "../../useCases/impl/order/GetOrderByStatusService";
-import { IGetOrderByStatusService } from "../../useCases/interfaces/order/IGetOrderByStatusService";
 import { IDataSource } from "../../repositories/dataSource/IDataSource";
 import { OrderRepository } from "../../repositories/impl/OrderRepository";
+import { ILogger } from "../../configurations/Logger/ILogger";
 
 
 class GetOrderByStatusController {
 
   public dataSource: IDataSource;
+  public logger: ILogger;
 
-  constructor(dataSource: IDataSource) {
+  constructor(dataSource: IDataSource, logger: ILogger) {
     this.dataSource = dataSource;
+    this.logger = logger
   }
 
   handler = async (request: Request, response: Response) => {
@@ -24,7 +24,7 @@ class GetOrderByStatusController {
       response.status(200).send({ "message": "Orders found", "orders": resp });
     }
     ).catch(error => {
-      logger.error(`Get order by status: ${error.message}`)
+      this.logger.error(`Get order by status: ${error.message}`)
       response.status(500).send({ "error": error.message });
     })
   }

@@ -1,18 +1,19 @@
 import { Request, Response } from "express";
-import { container } from "tsyringe";
-import { logger } from "../../configurations/WinstonLog";
 import { GetAllUnfinishedOrdersService } from "../../useCases/impl/order/GetAllUnfinishedOrdersService";
-import { IGetAllUnfinishedOrdersService } from "../../useCases/interfaces/order/IGetAllUnfinishedOrdersService";
 import { IDataSource } from "../../repositories/dataSource/IDataSource";
 import { OrderRepository } from "../../repositories/impl/OrderRepository";
+import { ILogger } from "../../configurations/Logger/ILogger";
 
 
 class GetAllUnfinishedOrdersController {
 
   public dataSource: IDataSource;
+  public logger: ILogger;
 
-  constructor(dataSource: IDataSource) {
+
+  constructor(dataSource: IDataSource, logger: ILogger) {
     this.dataSource = dataSource;
+    this.logger = logger
   }
 
   handler = async (request: Request, response: Response) => {
@@ -30,7 +31,7 @@ class GetAllUnfinishedOrdersController {
         )
       })
       .catch(error => {
-        logger.error(`Get orders: ${error.message}`)
+        this.logger.error(`Get orders: ${error.message}`)
         response.status(500).send({ "error": error.message });
       })
   }

@@ -1,9 +1,6 @@
 import { Request, Response } from "express";
-import { container } from "tsyringe";
 import { GetOrderByIdService } from "../../useCases/impl/order/GetOrderByIdService";
 import { UpdatePaymentService } from "../../useCases/impl/payment/UpdatePaymentService";
-import { IGetOrderByIdService } from "../../useCases/interfaces/order/IGetOrderByIdService";
-import { IUpdatePaymentService } from "../../useCases/interfaces/payment/IUpdatePaymentService";
 import { OrderRepository } from "../../repositories/impl/OrderRepository";
 import { IDataSource } from "../../repositories/dataSource/IDataSource";
 

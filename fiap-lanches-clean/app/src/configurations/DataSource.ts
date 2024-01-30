@@ -1,11 +1,11 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
-import { logger } from "./WinstonLog";
 import { Promotion } from "./DataSourceModelation/PromotionEntityConfig";
 import { Client } from "./DataSourceModelation/ClientEntityConfig";
 import { Employee } from "./DataSourceModelation/EmployeeEntityConfig";
 import { Order } from "./DataSourceModelation/OrderEntityConfig";
 import { Product } from "./DataSourceModelation/ProductEntityConfig";
+import { LoggerImpl } from "./Logger/LoggerImpl";
 require('dotenv').config();
 
 export const AppDataSource = new DataSource({
@@ -35,6 +35,7 @@ export const AppDataSource = new DataSource({
 //   migrations: [],
 // });
 
+const logger = new LoggerImpl();
 AppDataSource.initialize()
-  .then(() => logger.info("Database initialized!"))
+  .then(() => new logger.info("Database initialized!"))
   .catch((error) => logger.error("Database with error: " + error));

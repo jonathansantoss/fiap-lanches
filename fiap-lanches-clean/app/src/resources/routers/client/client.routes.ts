@@ -17,14 +17,16 @@ import { UpdateClientController } from "../../../controllers/client/UpdateClient
 import { Client } from "../../../configurations/DataSourceModelation/ClientEntityConfig";
 import { AppDataSource } from "../../../configurations/DataSource";
 import { TypeOrmDataSource } from "../../../repositories/dataSource/TypeOrmDataSource";
+import { LoggerImpl } from "../../../configurations/Logger/LoggerImpl";
 
 const clientRouter = Router();
 
+const logger = new LoggerImpl();
 const clientRepositorySource = AppDataSource.getRepository(Client);
 const typeOrmDataSource = new TypeOrmDataSource(clientRepositorySource);
 
-const createClientController = new CreateClientController(typeOrmDataSource);
-const deleteClientController = new DeleteClientController(typeOrmDataSource);
+const createClientController = new CreateClientController(typeOrmDataSource, logger);
+const deleteClientController = new DeleteClientController(typeOrmDataSource, logger);
 const findClientByCpfController = new FindClientByCpfController(typeOrmDataSource);
 const updateClientController = new UpdateClientController(typeOrmDataSource);
 const listClientsController = new ListClientsController(typeOrmDataSource);

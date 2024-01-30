@@ -58,7 +58,7 @@ Simplificada
 
 
 ## 📜 Explicação Arquitetura
-[Link para o vídeo explicativo](https://www.youtube.com/watch?v=aan1C66lmbY)
+[Link para o vídeo explicativo](https://youtu.be/P2ix0tDUAvk)
 
 
 ## 🌐 Swagger - API Coleção
