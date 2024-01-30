@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: fiap-lanches-app
-          image: fiaplanches165/fiaplanches:2.0.5
+          image: marques0x01/fiaplanches:2.0.1
           env:
             - name: POSTGRES_HOST
               valueFrom:
