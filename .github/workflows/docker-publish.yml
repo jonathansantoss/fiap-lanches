@@ -16,7 +16,7 @@ on:
 
 env:
   # Use docker.io for Docker Hub if empty
-  REGISTRY: hubproxy.docker.internal:5555
+  REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: fiaplanches165/fiaplanches
 
