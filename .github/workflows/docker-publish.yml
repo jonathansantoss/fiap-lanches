@@ -41,6 +41,17 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
+      - name: Build, tag, and push docker image to Amazon ECR
+        env:
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REPOSITORY: fiap-lanches
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          cd fiap-lanches-clean
+          cd app
+          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+
       # # Set up BuildKit Docker container builder to be able to build
       # # multi-platform images and export cache
       # # https://github.com/docker/setup-buildx-action
