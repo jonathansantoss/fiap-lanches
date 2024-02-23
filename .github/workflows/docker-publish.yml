@@ -29,22 +29,33 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Set up BuildKit Docker container builder to be able to build
-      # multi-platform images and export cache
-      # https://github.com/docker/setup-buildx-action
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@f95db51fddba0c2d1ec667646a06c2ce06100226 # v3.0.0
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4 # More information on this action can be found below in the 'AWS Credentials' section
         with:
-          # registry: ghcr.io
-          username: fiaplanches165
-          password: dckr_pat_UOkG0z4dhWHcHLNorIIagEenaOw
+          role-to-assume: arn:aws:iam::123456789012:role/my-github-actions-role
+          aws-region: aws-region-1
 
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          context: ./fiap-lanches-clean/app
-          push: true
-          tags: fiaplanches165/fiaplanches:latest
+      - name: Login to Amazon ECR Private
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      # # Set up BuildKit Docker container builder to be able to build
+      # # multi-platform images and export cache
+      # # https://github.com/docker/setup-buildx-action
+      # - name: Set up Docker Buildx
+      #   uses: docker/setup-buildx-action@f95db51fddba0c2d1ec667646a06c2ce06100226 # v3.0.0
+
+      # - name: Login to Docker Hub
+      #   uses: docker/login-action@v3
+      #   with:
+      #     # registry: ghcr.io
+      #     username: fiaplanches165
+      #     password: dckr_pat_UOkG0z4dhWHcHLNorIIagEenaOw
+
+      # - name: Build and push
+      #   uses: docker/build-push-action@v5
+      #   with:
+      #     context: ./fiap-lanches-clean/app
+      #     push: true
+      #     tags: fiaplanches165/fiaplanches:latest
